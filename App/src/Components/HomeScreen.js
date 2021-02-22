@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button,TextInput } from "react-native";
 import Axios from "axios";
 
 function HomeScreen({ navigation }) {
+  const [gender,setGender] = useState(true);
   const[response,setResponse]= useState(0);
   useEffect(() => {
     getData();
@@ -21,6 +22,36 @@ function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>{response}</Text>
+      <Button>
+        {gender ? "Male":"Female"}
+      </Button>
+      <TextInput
+        style={{ 
+          height: 40, 
+          borderColor: 'gray', 
+          borderWidth: 1,
+          placeholderTextColor: 'gray',
+        }}
+        placeholder="Weight"
+      />
+      <TextInput
+        style={{ 
+          height: 40, 
+          borderColor: 'gray', 
+          borderWidth: 1,
+          placeholderTextColor: 'gray',
+        }}
+        placeholder="Height"
+      />
+      <TextInput
+        style={{ 
+          height: 40, 
+          borderColor: 'gray', 
+          borderWidth: 1,
+          placeholderTextColor: 'gray',
+        }}
+        placeholder="Age"
+      />
     </View>
   );
 }

@@ -1,7 +1,6 @@
 package ch.AndreiNetwork.Fitness.API;
 
 import ch.AndreiNetwork.Fitness.Models.CalculationModel;
-import ch.AndreiNetwork.Fitness.ObjectModels.CalorieParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
