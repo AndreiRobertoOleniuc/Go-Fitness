@@ -9,6 +9,12 @@ import java.util.ArrayList;
 public class LoginRegController {
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/api/public/")
+    public String login(){
+        return "API Runs";
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/public/login")
     public boolean login(@RequestParam(value = "username",defaultValue = "0") String username,
                          @RequestParam(value = "password",defaultValue = "0") String password){
