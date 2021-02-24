@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator();
 import HomeScreen from "./Components/HomeScreen";
 import Essen from "./Components/Essen";
 import Training from "./Components/Training";
-import Ziele from "./Components/Ziele";
+import Profil from "./Components/Profil";
 
 export default function App() {
   return (
@@ -40,8 +40,8 @@ export default function App() {
         <Tab.Screen name="Training">
           {props => <Training {...props} />}
         </Tab.Screen>
-        <Tab.Screen  name="Ziele">
-          {props => <Ziele {...props}/>}
+        <Tab.Screen  name="Profil">
+          {props => <Profil {...props}/>}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>

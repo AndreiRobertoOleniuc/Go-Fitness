@@ -28,7 +28,6 @@ public class LoginRegController {
                              @RequestParam(value = "height",defaultValue = "0") double height,
                              @RequestParam(value = "age",defaultValue = "0") double age,
                              @RequestBody ArrayList<Double> stunden){
-        System.out.println(stunden);
         double mittelWert = new CalculationModel().getBaseCalorie(gender,weight,height,age);
         mittelWert*= new CalculationModel().getPAL(stunden);
         return mittelWert;

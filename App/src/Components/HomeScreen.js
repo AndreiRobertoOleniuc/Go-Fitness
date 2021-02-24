@@ -9,7 +9,7 @@ function HomeScreen({ navigation }) {
   const [age,setAge] = useState(0);
   const[response,setResponse]= useState(0);
   const getData = async ()=>{
-    const body = [11.0,2.0,6.0,2.0,1.0,2.0];
+    const body = [8.0,2.0,6.0,2.0,1.0,2.0];
     Axios.post(`http://localhost:8080/api/public/getCalorie?gender=${gender}&weight=${weight}&height=${height}&age=${age}`,body)
     .then((res)=>{
       console.log(res.data);
