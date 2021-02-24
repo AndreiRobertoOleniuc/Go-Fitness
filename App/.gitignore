@@ -62,3 +62,6 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+
+# api keys
+/src/keys.txt
