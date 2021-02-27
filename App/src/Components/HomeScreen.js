@@ -50,7 +50,7 @@ function HomeScreen({ navigation }) {
       />
       <TextInput
         style={{ 
-          height: 40, 
+            height: 40,
           borderColor: 'gray', 
           borderWidth: 1,
           placeholderTextColor: 'gray',
