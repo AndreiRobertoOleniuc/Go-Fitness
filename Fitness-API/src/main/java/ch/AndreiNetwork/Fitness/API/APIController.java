@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-public class LoginRegController {
+public class APIController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/")
@@ -31,5 +31,12 @@ public class LoginRegController {
         double mittelWert = new CalculationModel().getBaseCalorie(gender,weight,height,age);
         mittelWert*= new CalculationModel().getPAL(stunden);
         return mittelWert;
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/api/public/update")
+    public String updateProject(){
+
+        return "OK";
     }
 }

@@ -10,7 +10,7 @@ function HomeScreen({ navigation }) {
   const[response,setResponse]= useState(0);
   const getData = async ()=>{
     const body = [8.0,2.0,6.0,2.0,1.0,2.0];
-    Axios.post(`http://localhost:8080/api/public/getCalorie?gender=${gender}&weight=${weight}&height=${height}&age=${age}`,body)
+    Axios.post(`http://andreinetwork.hopto.org/api/public/getCalorie?gender=${gender}&weight=${weight}&height=${height}&age=${age}`,body)
     .then((res)=>{
       console.log(res.data);
       setResponse(res.data);
