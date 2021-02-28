@@ -36,7 +36,11 @@ public class APIController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/update")
     public String updateProject(){
-
+        try{
+            Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat")
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         return "OK";
     }
 }
