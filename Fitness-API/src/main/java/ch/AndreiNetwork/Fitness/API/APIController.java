@@ -37,11 +37,17 @@ public class APIController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/update")
     public String updateProject(){
-        try{
-            System.out.println("Update");
-            Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat");
-        }catch(IOException e){
-            e.printStackTrace();
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+        System.out.println(isWindows);
+        if(isWindows){
+            try{
+                System.out.println("Windows");
+                Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat");
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("Linux");
         }
         return "OK";
     }
