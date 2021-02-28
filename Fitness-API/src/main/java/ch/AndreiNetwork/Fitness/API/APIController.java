@@ -51,7 +51,15 @@ public class APIController {
             System.out.println("Linux");
         }
         pull();
-        FitnessApiApplication.restart();
+        try
+        {
+            Thread.sleep(5000);
+            FitnessApiApplication.restart();
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
         return "OK";
     }
     public void pull(){
