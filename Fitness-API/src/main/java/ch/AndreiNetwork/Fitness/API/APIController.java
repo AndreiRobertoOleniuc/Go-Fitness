@@ -52,7 +52,7 @@ public class APIController {
             }
         }else{
             System.out.println("Linux");
-            sCommandString = "sh /home/pi/Update.sh";
+            sCommandString = "sh Update.sh";
             CommandLine oCmdLine = CommandLine.parse(sCommandString);
             DefaultExecutor oDefaultExecutor = new DefaultExecutor();
             oDefaultExecutor.setExitValue(0);
@@ -69,3 +69,8 @@ public class APIController {
         return "OK";
     }
 }
+/*sudo killall -9 java
+cd /home/pi/Desktop/Project/Go-Fitness
+git pull https://github.com/AndreiRobertoOleniuc/Go-Fitness.git master
+cd Fitness-API
+mvn spring-boot:run */
