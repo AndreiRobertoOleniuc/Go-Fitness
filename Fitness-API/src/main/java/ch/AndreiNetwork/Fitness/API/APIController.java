@@ -51,6 +51,7 @@ public class APIController {
                 e.printStackTrace();
             }
         }else{
+            //Hell Yes
             System.out.println("Linux");
             sCommandString = "sh Update.sh";
             CommandLine oCmdLine = CommandLine.parse(sCommandString);
