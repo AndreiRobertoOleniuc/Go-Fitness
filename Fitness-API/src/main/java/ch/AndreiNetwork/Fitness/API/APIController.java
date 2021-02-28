@@ -17,7 +17,7 @@ public class APIController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/")
     public String login(){
-        return "API Runs";
+        return "API Runs and Updated";
     }
 
     @CrossOrigin(origins = "*")
@@ -42,7 +42,6 @@ public class APIController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/restart")
     public String updateProject(){
-        System.out.println("IT WORKED");
         int iExitValue;
         String sCommandString;
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
