@@ -7,9 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteException;
 
 @RestController
 public class APIController {
@@ -41,24 +38,31 @@ public class APIController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/restart")
-    public String updateProject(){
+    public String updateProject() throws IOException {
         int iExitValue;
         String sCommandString;
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         if(isWindows){
-            System.out.println("Windows");
+            try{
+                System.out.println("Windows");
+                Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat");
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }else{
             System.out.println("Linux");
-        }
-        pull();
-        try
-        {
-            Thread.sleep(5000);
-            FitnessApiApplication.restart();
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
+            String command = "python /c start python  C:\\Automation\\automation.py";
+            Process p = Runtime.getRuntime().exec(command );
+            /*pull();
+            try
+            {
+                Thread.sleep(5000);
+                FitnessApiApplication.restart();
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }*/
         }
         return "OK";
     }
