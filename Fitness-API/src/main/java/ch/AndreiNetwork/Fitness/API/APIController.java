@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
 
 @RestController
 public class APIController {
@@ -37,8 +40,9 @@ public class APIController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/update")
     public String updateProject(){
+        int iExitValue;
+        String sCommandString;
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        System.out.println(isWindows);
         if(isWindows){
             try{
                 System.out.println("Windows");
@@ -48,6 +52,19 @@ public class APIController {
             }
         }else{
             System.out.println("Linux");
+            sCommandString = "sh /home/pi/Update.sh";
+            CommandLine oCmdLine = CommandLine.parse(sCommandString);
+            DefaultExecutor oDefaultExecutor = new DefaultExecutor();
+            oDefaultExecutor.setExitValue(0);
+            try {
+                iExitValue = oDefaultExecutor.execute(oCmdLine);
+            } catch (ExecuteException e) {
+                System.err.println("Execution failed.");
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.err.println("permission denied.");
+                e.printStackTrace();
+            }
         }
         return "OK";
     }
