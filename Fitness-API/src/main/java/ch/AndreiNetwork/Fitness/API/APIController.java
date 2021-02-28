@@ -3,7 +3,9 @@ package ch.AndreiNetwork.Fitness.API;
 import ch.AndreiNetwork.Fitness.Models.CalculationModel;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -38,40 +40,38 @@ public class APIController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/public/update")
+    @GetMapping("/api/public/restart")
     public String updateProject(){
         int iExitValue;
         String sCommandString;
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         if(isWindows){
-            try{
-                System.out.println("Windows");
-                Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat");
-            }catch(IOException e){
-                e.printStackTrace();
-            }
+            System.out.println("Windows");
         }else{
-            //Hell Yes
             System.out.println("Linux");
-            sCommandString = "sh Update.sh";
-            CommandLine oCmdLine = CommandLine.parse(sCommandString);
-            DefaultExecutor oDefaultExecutor = new DefaultExecutor();
-            oDefaultExecutor.setExitValue(0);
-            try {
-                iExitValue = oDefaultExecutor.execute(oCmdLine);
-            } catch (ExecuteException e) {
-                System.err.println("Execution failed.");
-                e.printStackTrace();
-            } catch (IOException e) {
-                System.err.println("permission denied.");
-                e.printStackTrace();
-            }
         }
+        pull();
+        FitnessApiApplication.restart();
         return "OK";
     }
+    public void pull(){
+        try{
+            Process process = Runtime.getRuntime().exec("git pull https://github.com/AndreiRobertoOleniuc/Go-Fitness.git master ");
+            StringBuilder output = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while((line = reader.readLine())!= null){
+                output.append(line + "\n");
+            }
+            int exitVal = process.waitFor();
+            if(exitVal == 0){
+                System.out.println("Success");
+                System.out.println(output);
+            }else{
+                System.out.println("Something abnormal has happened :( ");
+            }
+        }catch(IOException | InterruptedException e){
+            e.printStackTrace();
+        }
+    }
 }
-/*sudo killall -9 java
-cd /home/pi/Desktop/Project/Go-Fitness
-git pull https://github.com/AndreiRobertoOleniuc/Go-Fitness.git master
-cd Fitness-API
-mvn spring-boot:run */
