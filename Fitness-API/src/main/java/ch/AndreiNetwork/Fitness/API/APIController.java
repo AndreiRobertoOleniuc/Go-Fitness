@@ -3,6 +3,7 @@ package ch.AndreiNetwork.Fitness.API;
 import ch.AndreiNetwork.Fitness.Models.CalculationModel;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
@@ -37,7 +38,8 @@ public class APIController {
     @GetMapping("/api/public/update")
     public String updateProject(){
         try{
-            Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat")
+            System.out.println("Update");
+            Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat");
         }catch(IOException e){
             e.printStackTrace();
         }
