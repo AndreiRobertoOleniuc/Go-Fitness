@@ -17,7 +17,7 @@ public class APIController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/")
     public String login(){
-        return "API Runs and Updated";
+        return "API Runs and Updated and now?";
     }
 
     @CrossOrigin(origins = "*")
