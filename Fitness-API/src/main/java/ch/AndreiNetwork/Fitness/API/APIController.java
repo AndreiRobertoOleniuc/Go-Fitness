@@ -51,9 +51,7 @@ public class APIController {
             }
         }else{
             System.out.println("Linux");
-            String command = "python /c start python  C:\\Automation\\automation.py";
-            Process p = Runtime.getRuntime().exec(command );
-            /*pull();
+            pull();
             try
             {
                 Thread.sleep(5000);
@@ -62,7 +60,7 @@ public class APIController {
             catch(InterruptedException ex)
             {
                 Thread.currentThread().interrupt();
-            }*/
+            }
         }
         return "OK";
     }

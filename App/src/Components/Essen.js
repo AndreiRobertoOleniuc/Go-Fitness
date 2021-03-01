@@ -13,14 +13,14 @@ function Essen({ navigation }) {
             });*/
     },[]);
     const getData = async (apiKey)=>{
-        axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${q18XHCe4DoPeJhFVuYWfYjAHpe2a3wXVgkoGljXE}&query=Apple&dataType=Survey%20(FNDDS)&pageSize=10`)
+        /*axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${}&query=Apple&dataType=Survey%20(FNDDS)&pageSize=10`)
         .then((res)=>{
             console.log(res.data);
             setFoods(res.data);
         })
         .catch((err)=>{
             console.log(err);
-        })
+        })*/
     }
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
