@@ -13,7 +13,7 @@ export default function Login({navigation}){
             color: '#f1654c',
             fontWeight: 'bold',
             fontSize: 30,
-            marginTop:50,
+            marginTop:100,
             marginBottom:150,
         },
         input:{
@@ -30,13 +30,14 @@ export default function Login({navigation}){
             fontSize:20,
         },
         login:{
-            borderRadius:10,
+            borderRadius:20,
             backgroundColor:"#f1654c",
             height:40,
             padding:12,
             width:320,
             marginTop:10,
             marginBottom:10,
+            alignItems:"center"
         },
         btnContainer:{
             flex:1,
@@ -61,14 +62,14 @@ export default function Login({navigation}){
             </View>
             <View>
                 <Text style={styles.greet}>Welcome</Text>
-                <TextInput placeholder="Username" style={styles.input}/>
+                <TextInput placeholder="Username or Email" style={styles.input}/>
                 <TextInput placeholder="Password" style={styles.input} secureTextEntry={true}/>  
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.login}>
                     <Text style={styles.whiteText}>Login</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={styles.signUpContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('Sign Up')} style={styles.signUpContainer}>
                     <Text>Don't have an account? </Text>
                     <Text style={styles.signUp}>Sign Up</Text>
                 </TouchableOpacity>
