@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, Text, View,TextInput,TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import Axios from "axios";
 export default function Registrieren({navigation}){
     const styles = StyleSheet.create({
         container: {
@@ -61,6 +61,18 @@ export default function Registrieren({navigation}){
             opacity:0.5,
         }
     });
+    const [response,setResponse] = useState(null);
+    const getCal = async ()=>{
+        const body = [8.0,2.0,6.0,2.0,1.0,2.0];
+        Axios.post(`http://andreinetwork.hopto.org/api/public/getCalorie?gender=${true}&weight=${62}&height=${170}&age=${19}`,body)
+        .then((res)=>{
+            console.log(res.data);
+            setResponse(res.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container} bounces={false}>
             <View>
@@ -80,7 +92,7 @@ export default function Registrieren({navigation}){
                 <TextInput placeholder="Confirm Password" style={styles.input} secureTextEntry={true}/>  
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.register}>
+                <TouchableOpacity style={styles.register} onPress={getCal}>
                     <Text style={styles.whiteText}>Register</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.signUpContainer}>
@@ -91,3 +103,30 @@ export default function Registrieren({navigation}){
         </KeyboardAwareScrollView>
     )
 }
+
+/*
+sudo apt-get update
+1. git
+sudo apt-get install git
+2. node
+sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt -y install nodejs
+3. java
+sudo apt update
+sudo apt install openjdk-8-jdk
+4. maven
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install maven
+5. nginx
+sudo apt update
+sudo apt install nginx
+6. noip client
+cd /usr/local/src/
+wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
+tar xf noip-duc-linux.tar.gz
+cd noip-2.1.9-1/
+make install
+7. vs code
+sudo snap install --classic code
+*/
