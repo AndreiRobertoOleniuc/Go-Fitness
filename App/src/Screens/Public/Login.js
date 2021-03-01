@@ -1,7 +1,78 @@
-import React,{useEffect,useState} from "react";
-import { StyleSheet, Text, View, Button,TextInput } from "react-native";
-import Axios from "axios";
+import React from "react";
+import { StyleSheet, Text, View, Button,TextInput,TouchableOpacity } from "react-native";
 
 export default function Login({navigation}){
-    
+    const styles = StyleSheet.create({
+        container: {
+            flex:1,
+            flexDirection:"column",
+            alignItems:"center",
+            backgroundColor:"#f5f5f5",        
+        },
+        title: {
+            color: '#f1654c',
+            fontWeight: 'bold',
+            fontSize: 30,
+            marginTop:50,
+            marginBottom:150,
+        },
+        input:{
+            height:40,
+            width:320,
+            borderRadius:10,
+            backgroundColor:"#dedcdc",
+            padding:12,
+            marginBottom:10,
+        }, 
+        greet:{
+            margin:5,
+            opacity:0.5,
+            fontSize:20,
+        },
+        login:{
+            borderRadius:10,
+            backgroundColor:"#f1654c",
+            height:40,
+            padding:12,
+            width:320,
+            marginTop:10,
+            marginBottom:10,
+        },
+        btnContainer:{
+            flex:1,
+            flexDirection:"column",
+            alignItems:"center",
+        },  
+        whiteText:{
+            color:"white",
+        },
+        signUpContainer:{
+            flex:1,
+            flexDirection:"row",
+        },
+        signUp:{
+            color:"#f1654c",
+        }
+    });
+    return(
+        <View style={styles.container}>
+            <View>
+                <Text style={styles.title}>Go Fitness</Text>
+            </View>
+            <View>
+                <Text style={styles.greet}>Welcome</Text>
+                <TextInput placeholder="Username" style={styles.input}/>
+                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true}/>  
+            </View>
+            <View style={styles.btnContainer}>
+                <TouchableOpacity style={styles.login}>
+                    <Text style={styles.whiteText}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={styles.signUpContainer}>
+                    <Text>Don't have an account? </Text>
+                    <Text style={styles.signUp}>Sign Up</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    )
 }
