@@ -1,6 +1,12 @@
 package ch.AndreiNetwork.Fitness.API;
 
 import ch.AndreiNetwork.Fitness.Models.CalculationModel;
+import ch.AndreiNetwork.Fitness.Models.GitModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -11,19 +17,22 @@ import java.util.ArrayList;
 @RestController
 public class APIController {
 
+    //Check API
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/")
     public String login(){
         return "API Runs ";
     }
 
+    //Login and Registration
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/login")
     public boolean login(@RequestParam(value = "username",defaultValue = "0") String username,
-                         @RequestParam(value = "password",defaultValue = "0") String password){
-        return false;
+                         @RequestParam(value = "password",defaultValue = "0") String password) throws JsonProcessingException {
+        return true;
     }
 
+    //Get Base Calorie (no gain no loss)
     @CrossOrigin(origins = "*")
     @PostMapping("/api/public/getCalorie")
     public double getCalorie(@RequestParam(value = "gender",defaultValue = "true") boolean gender,
@@ -36,6 +45,7 @@ public class APIController {
         return mittelWert;
     }
 
+    //Restart API on Windows, Linux still TODO
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/restart")
     public String updateProject() throws IOException {
@@ -51,7 +61,7 @@ public class APIController {
             }
         }else{
             System.out.println("Linux");
-            pull();
+            new GitModel().pull();
             try
             {
                 Thread.sleep(5000);
@@ -64,24 +74,5 @@ public class APIController {
         }
         return "OK";
     }
-    public void pull(){
-        try{
-            Process process = Runtime.getRuntime().exec("git pull https://github.com/AndreiRobertoOleniuc/Go-Fitness.git master ");
-            StringBuilder output = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while((line = reader.readLine())!= null){
-                output.append(line + "\n");
-            }
-            int exitVal = process.waitFor();
-            if(exitVal == 0){
-                System.out.println("Success");
-                System.out.println(output);
-            }else{
-                System.out.println("Something abnormal has happened :( ");
-            }
-        }catch(IOException | InterruptedException e){
-            e.printStackTrace();
-        }
-    }
 }
+

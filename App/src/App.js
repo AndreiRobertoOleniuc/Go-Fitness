@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from "./Screens/Public/Login";
 import SignUp from "./Screens/Public/Registrieren";
 const Stack = createStackNavigator();
-
+//Icons https://icons.expo.fyi/
 export default function App() {
   return (
       <NavigationContainer>

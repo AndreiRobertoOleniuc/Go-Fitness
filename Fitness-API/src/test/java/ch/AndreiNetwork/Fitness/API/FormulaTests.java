@@ -100,14 +100,6 @@ public class FormulaTests {
 
     //New Formula
     @Test
-    public void testNewFormula() {
-        double cal;
-        double base = new CalculationModel().getBaseCalorie(true, 62, 170, 18);
-        ArrayList<Double> numbers = new ArrayList<Double>(Arrays. asList(10.0, 2.5, 9.0, 1.5, 1.0, 2.0));
-        cal = base * new CalculationModel().getPAL(numbers);
-        assertEquals(2045, (int) cal);
-    }
-    @Test
     public void testNewFormula2() {
         double cal;
         double base = new CalculationModel().getBaseCalorie(false, 55, 153, 17);
