@@ -1,5 +1,7 @@
 package ch.AndreiNetwork.Fitness.ObjectModels;
 
+import java.util.ArrayList;
+
 public class User {
     private String fullName;
     private String username;
@@ -8,8 +10,8 @@ public class User {
     private boolean gender;
     private double weight;
     private double height;
-    private int age;
-    private double[] pal;
+    private int age = 0;
+    private ArrayList<Double> pal;
 
     public User(String fullName, String username, String email, String password) {
         this.fullName = fullName;
@@ -50,7 +52,7 @@ public class User {
         return age;
     }
 
-    public double[] getPal() {
+    public ArrayList<Double> getPal() {
         return pal;
     }
 
@@ -86,7 +88,7 @@ public class User {
         this.age = age;
     }
 
-    public void setPal(double[] pal) {
+    public void setPal(ArrayList<Double> pal) {
         this.pal = pal;
     }
 }

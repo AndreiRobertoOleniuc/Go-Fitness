@@ -2,6 +2,8 @@ package ch.AndreiNetwork.Fitness.API;
 
 import ch.AndreiNetwork.Fitness.Models.CalculationModel;
 import ch.AndreiNetwork.Fitness.Models.GitModel;
+import ch.AndreiNetwork.Fitness.Models.UserModel;
+import ch.AndreiNetwork.Fitness.ObjectModels.LoginPayload;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +18,10 @@ import java.util.ArrayList;
 
 @RestController
 public class APIController {
-
+    UserModel uM;
+    public APIController(){
+        uM = new UserModel();
+    }
     //Check API
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/")
@@ -27,9 +32,9 @@ public class APIController {
     //Login and Registration
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/login")
-    public boolean login(@RequestParam(value = "username",defaultValue = "0") String username,
-                         @RequestParam(value = "password",defaultValue = "0") String password) throws JsonProcessingException {
-        return true;
+    public LoginPayload login(@RequestParam(value = "username",defaultValue = "0") String username,
+                              @RequestParam(value = "password",defaultValue = "0") String password)  {
+        return uM.login(username,password);
     }
 
     //Get Base Calorie (no gain no loss)
