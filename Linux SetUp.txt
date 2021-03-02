@@ -21,4 +21,4 @@ tar xf noip-duc-linux.tar.gz
 cd noip-2.1.9-1/
 make install
 7. vs code
-sudo snap install --classic code
+sudo apt install code
