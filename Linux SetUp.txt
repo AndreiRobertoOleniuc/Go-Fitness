@@ -1,0 +1,24 @@
+sudo apt-get update
+1. git
+sudo apt-get install git
+2. node
+sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt -y install nodejs
+3. java
+sudo apt update
+sudo apt install openjdk-8-jdk
+4. maven
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install maven
+5. nginx
+sudo apt update
+sudo apt install nginx
+6. noip client
+cd /usr/local/src/
+wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
+tar xf noip-duc-linux.tar.gz
+cd noip-2.1.9-1/
+make install
+7. vs code
+sudo snap install --classic code
