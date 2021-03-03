@@ -22,12 +22,12 @@ export default function Registrieren({navigation}){
                 <TextInput placeholder="Confirm Password" style={styles.input} secureTextEntry={true}/> 
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.register}>
+                <TouchableOpacity style={styles.register} onPress={()=>navigation.navigate('Form')}>
                     <Text style={styles.whiteText}>Register</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.signUpContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.loginContainer}>
                     <Text>Already have an Accound </Text>
-                    <Text style={styles.signUp}>Login here</Text>
+                    <Text style={styles.login}>Login here</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAwareScrollView>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#f5f5f5",        
     },
     title: {
-        color: '#f1654c',
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 30,
         marginTop:100,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     register:{
         borderRadius:20,
-        backgroundColor:"#f1654c",
+        backgroundColor:"black",
         height:40,
         padding:12,
         width:320,
@@ -81,12 +81,12 @@ const styles = StyleSheet.create({
     whiteText:{
         color:"white",
     },
-    signUpContainer:{
+    loginContainer:{
         flex:1,
         flexDirection:"row",
     },
-    signUp:{
-        color:"#f1654c",
+    login:{
+        color:"grey",
     },
     describe:{
         margin:5,

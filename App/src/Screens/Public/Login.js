@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#f5f5f5",        
     },
     title: {
-        color: '#f1654c',
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 30,
         marginTop:100,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     login:{
         borderRadius:20,
-        backgroundColor:"#f1654c",
+        backgroundColor:"black",
         height:40,
         padding:12,
         width:320,
@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
         flexDirection:"row",
     },
     signUp:{
-        color:"#f1654c",
+        color:"grey",
     }
 });
