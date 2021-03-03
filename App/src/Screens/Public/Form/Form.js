@@ -1,7 +1,10 @@
 import React,{useState} from "react";
 import { StyleSheet, Text, View,TextInput,TouchableOpacity,Button } from "react-native";
-import { MaterialIcons } from '@expo/vector-icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { MaterialIcons } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Form(){
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -29,6 +32,15 @@ export default function Form(){
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
                     />
+                </View>
+                <View style={styles.containerAge}>
+                    <Foundation name="male-female" size={24} color="black" />
+                </View>
+                <View style={styles.containerAge}>
+                    <FontAwesome5 name="weight" size={24} color="black" />
+                </View>
+                <View style={styles.containerAge}>
+                    <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
                 </View>
             </View>
         </View>
@@ -74,6 +86,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
         padding:12,
         width:320,
+        marginBottom:20,
     },
     choseDate:{
         color:"black",
