@@ -1,13 +1,17 @@
 import React,{useState} from "react";
-import { StyleSheet, Text, View,TextInput,TouchableOpacity,Button } from "react-native";
+import { StyleSheet, Text, View,TouchableOpacity } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { MaterialIcons } from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Form(){
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [selectedDate,setSelectedDate]= useState("Wähle dein Alter");
+
+    const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
+    const [styleFemale,setStyleFemale] = useState([styles.femaleContainer,"grey"]);
+
     const showDatePicker = () => {
     setDatePickerVisibility(true);
     };
@@ -16,16 +20,25 @@ export default function Form(){
         setDatePickerVisibility(false);
     };
     const handleConfirm = (date) => {
-        console.warn("A date has been picked: ", date);
+        const options = {  year: 'numeric', month: 'short', day: 'numeric' };
+        setSelectedDate(date.toLocaleDateString('de-DE', options));
         hideDatePicker();
     };
+    const changeToMale= ()=>{
+        setStyleMale([styles.maleContainerSelected,"white"]);
+        setStyleFemale([styles.femaleContainer,"grey"]);
+    }
+    const changeToFemale= ()=>{
+        setStyleFemale([styles.femaleContainerSelected,"white"]);
+        setStyleMale([styles.maleContainer,"grey"]);
+    }
     return(
         <View style={styles.container}>
             <Text style={styles.title}>Wir brauchen noch ein paar Infos</Text>
             <View style={styles.holder}>
                 <View style={styles.containerAge}>
                     <MaterialIcons name="date-range" size={24} color="black" />
-                    <TouchableOpacity title="Wähle dein Alter" onPress={showDatePicker} ><Text style={styles.choseDate}>Wähle dein Geburtsdatum</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={showDatePicker} ><Text style={styles.choseDate}>{selectedDate.toString()}</Text></TouchableOpacity>
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"
@@ -33,13 +46,16 @@ export default function Form(){
                         onCancel={hideDatePicker}
                     />
                 </View>
-                <View style={styles.containerAge}>
-                    <Foundation name="male-female" size={24} color="black" />
+                <View style={styles.containerGender}>
+                    <View style={styles.genderSelector}>
+                        <TouchableOpacity style={styleMale[0]} onPress={changeToMale}><FontAwesome5 name="male" size={24} color={styleMale[1]}/></TouchableOpacity>
+                        <TouchableOpacity style={styleFemale[0]} onPress={changeToFemale}><FontAwesome5 name="female" size={24} color={styleFemale[1]} /></TouchableOpacity>
+                    </View>
                 </View>
-                <View style={styles.containerAge}>
+                <View style={styles.containerWeight}>
                     <FontAwesome5 name="weight" size={24} color="black" />
                 </View>
-                <View style={styles.containerAge}>
+                <View style={styles.containerHeight}>
                     <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
                 </View>
             </View>
@@ -88,11 +104,80 @@ const styles = StyleSheet.create({
         width:320,
         marginBottom:20,
     },
+    containerGender:{
+        flexDirection:"row",
+        borderBottomColor:"black",
+        backgroundColor:"white",
+        borderRadius:10,
+        padding:12,
+        width:320,
+        marginBottom:20,
+        height:100,
+    },
+    containerWeight:{
+        flexDirection:"row",
+        borderBottomColor:"black",
+        backgroundColor:"white",
+        borderRadius:10,
+        padding:12,
+        width:320,
+        marginBottom:20,
+    },
+    containerHeight:{
+        flexDirection:"row",
+        borderBottomColor:"black",
+        backgroundColor:"white",
+        borderRadius:10,
+        padding:12,
+        width:320,
+        marginBottom:20,
+    },
     choseDate:{
         color:"black",
         fontSize:18,
         fontWeight:"300",
         marginLeft:10,
-    }
+    },
+    genderSelector:{
+        flexDirection:"row",
+        flex:1,
+        padding:10,
+    },  
+    maleContainer:{
+        borderRadius:10,
+        borderColor:"rgba(69, 82, 79,0.4)",
+        borderWidth:1,
+        flex:1,
+        alignItems:"center",
+        justifyContent:"center",
+        marginEnd:5,
+    },
+    femaleContainer:{
+        borderRadius:10,
+        borderColor:"rgba(69, 82, 79,0.4)",
+        borderWidth:1,
+        flex:1,
+        alignItems:"center",
+        justifyContent:"center",
+    },
+    femaleContainerSelected:{
+        borderRadius:10,
+        borderColor:"white",
+        borderWidth:1,
+        flex:1,
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:"#eb3b3b",
+    },
+    maleContainerSelected:{
+        borderRadius:10,
+        borderColor:"white",
+        borderWidth:1,
+        flex:1,
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:"#0cb5f2",
+        marginEnd:5,
+    },
 });
 

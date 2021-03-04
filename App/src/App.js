@@ -14,9 +14,9 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home" screenOptions={{
             headerShown: false
           }}>
+            <Stack.Screen name="Form" component={Form} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Sign Up" component={SignUp} />
-          <Stack.Screen name="Form" component={Form} />
         </Stack.Navigator>
       </NavigationContainer>
   );
