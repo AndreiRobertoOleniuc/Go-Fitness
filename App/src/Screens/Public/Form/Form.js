@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import { StyleSheet, Text, View,TouchableOpacity } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function Form(){
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
