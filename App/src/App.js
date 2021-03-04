@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from "./Screens/Public/Login";
@@ -9,6 +8,7 @@ import Home from "./Screens/Private/Home";
 const Stack = createStackNavigator();
 
 //Icons https://icons.expo.fyi/
+
 export default function App() {
   return (
       <NavigationContainer>
