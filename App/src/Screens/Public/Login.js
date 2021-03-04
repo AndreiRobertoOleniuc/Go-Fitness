@@ -6,21 +6,10 @@ export default function Login({navigation}){
     const [username,setUsername] = useState();
     const [password,setPassword] = useState();
     const login = async ()=>{
-        axios.get(`hhtp://localhost:8080/api/public/login?username=${username}&password=${password}`)
-        .then((res)=>{
-            if(res.data.loggedIn){
-                if(res.data.dataFilled){
-                    navigation.navigate("Private");
-                }else{
-                    navigation.navigate("Form");
-                }
-            }else{
-                navigation.navigate("Login");
-            }
-        })
+        
     }
-    const changeUsername = (e)=> setUsername(e.target.value);
-    const changePassword = (e) =>setPassword(e.target.value);
+    const changeUsername = (e) => setUsername(e.target.value);
+    const changePassword = (e) => setPassword(e.target.value);
     return(
         <View style={styles.container}>
             <View>
