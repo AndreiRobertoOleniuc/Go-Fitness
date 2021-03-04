@@ -37,6 +37,16 @@ public class APIController {
         return uM.login(username,password);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/api/public/register")
+    public boolean registration(
+            @RequestParam(value = "name",defaultValue = "0") String name,
+            @RequestParam(value = "email",defaultValue = "0") String email,
+            @RequestParam(value = "username",defaultValue = "0") String username,
+            @RequestParam(value = "password",defaultValue = "0") String password)  {
+        return uM.register(name,username,email,password);
+    }
+
     //Get Base Calorie (no gain no loss)
     @CrossOrigin(origins = "*")
     @PostMapping("/api/public/getCalorie")

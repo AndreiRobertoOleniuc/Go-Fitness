@@ -1,7 +1,26 @@
-import React from "react";
+import React,{useState} from "react";
 import { StyleSheet, Text, View,TextInput,TouchableOpacity } from "react-native";
+import axios from "axios";
 
 export default function Login({navigation}){
+    const [username,setUsername] = useState();
+    const [password,setPassword] = useState();
+    const login = async ()=>{
+        axios.get(`hhtp://localhost:8080/api/public/login?username=${username}&password=${password}`)
+        .then((res)=>{
+            if(res.data.loggedIn){
+                if(res.data.dataFilled){
+                    navigation.navigate("Private");
+                }else{
+                    navigation.navigate("Form");
+                }
+            }else{
+                navigation.navigate("Login");
+            }
+        })
+    }
+    const changeUsername = (e)=> setUsername(e.target.value);
+    const changePassword = (e) =>setPassword(e.target.value);
     return(
         <View style={styles.container}>
             <View>
@@ -9,11 +28,11 @@ export default function Login({navigation}){
             </View>
             <View>
                 <Text style={styles.greet}>Welcome</Text>
-                <TextInput placeholder="Username or Email" style={styles.input}/>
-                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true}/>  
+                <TextInput placeholder="Username or Email" style={styles.input} onChange={changeUsername}/>
+                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} onChange={changePassword}/>  
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.login}>
+                <TouchableOpacity style={styles.login} onPress={login}>
                     <Text style={styles.whiteText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Sign Up')} style={styles.signUpContainer}>
