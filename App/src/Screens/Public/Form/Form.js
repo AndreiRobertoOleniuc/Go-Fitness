@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import { StyleSheet, Text, View,TouchableOpacity } from "react-native";
+import React,{useState,useEffect} from "react";
+import { StyleSheet, Text, View,TouchableOpacity,Picker } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -11,6 +11,12 @@ export default function Form(){
 
     const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
     const [styleFemale,setStyleFemale] = useState([styles.femaleContainer,"grey"]);
+
+    const [selectedValue, setSelectedValue] = useState(2000);
+    const [years,setYears] = useState([]);
+
+    useEffect(() => {
+    }, [])
 
     const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -32,6 +38,9 @@ export default function Form(){
         setStyleFemale([styles.femaleContainerSelected,"white"]);
         setStyleMale([styles.maleContainer,"grey"]);
     }
+    //Text Fields anstatt UI Elements
+    //Numeri
+    //keyboardType='numeric'
     return(
         <View style={styles.container}>
             <Text style={styles.title}>Wir brauchen noch ein paar Infos</Text>
@@ -57,6 +66,14 @@ export default function Form(){
                 </View>
                 <View style={styles.containerHeight}>
                     <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
+                    <Picker
+                        selectedValue={selectedValue}
+                        style={{ height: 20, width: 200 }}
+                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                    >
+                        <Picker.Item label="2000" value="2000" />
+                        <Picker.Item label="2001" value="2001" />
+                </Picker>
                 </View>
             </View>
         </View>
