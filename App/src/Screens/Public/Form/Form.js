@@ -1,35 +1,14 @@
 import React,{useState,useEffect} from "react";
-import { StyleSheet, Text, View,TouchableOpacity,Picker } from "react-native";
+import { StyleSheet, Text, View,TouchableOpacity,Picker,TextInput } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function Form(){
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [selectedDate,setSelectedDate]= useState("Wähle dein Alter");
-
     const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
     const [styleFemale,setStyleFemale] = useState([styles.femaleContainer,"grey"]);
 
-    const [selectedValue, setSelectedValue] = useState(2000);
-    const [years,setYears] = useState([]);
-
-    useEffect(() => {
-    }, [])
-
-    const showDatePicker = () => {
-    setDatePickerVisibility(true);
-    };
-
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
-    const handleConfirm = (date) => {
-        const options = {  year: 'numeric', month: 'short', day: 'numeric' };
-        setSelectedDate(date.toLocaleDateString('de-DE', options));
-        hideDatePicker();
-    };
     const changeToMale= ()=>{
         setStyleMale([styles.maleContainerSelected,"white"]);
         setStyleFemale([styles.femaleContainer,"grey"]);
@@ -38,22 +17,13 @@ export default function Form(){
         setStyleFemale([styles.femaleContainerSelected,"white"]);
         setStyleMale([styles.maleContainer,"grey"]);
     }
-    //Text Fields anstatt UI Elements
-    //Numeri
-    //keyboardType='numeric'
     return(
         <View style={styles.container}>
             <Text style={styles.title}>Wir brauchen noch ein paar Infos</Text>
             <View style={styles.holder}>
                 <View style={styles.containerAge}>
                     <MaterialIcons name="date-range" size={24} color="black" />
-                    <TouchableOpacity onPress={showDatePicker} ><Text style={styles.choseDate}>{selectedDate.toString()}</Text></TouchableOpacity>
-                    <DateTimePickerModal
-                        isVisible={isDatePickerVisible}
-                        mode="date"
-                        onConfirm={handleConfirm}
-                        onCancel={hideDatePicker}
-                    />
+                    <TextInput placeholder="Geburtsdatum (Format 10-06-2005)" style={styles.input} keyboardType='numeric' />
                 </View>
                 <View style={styles.containerGender}>
                     <View style={styles.genderSelector}>
@@ -63,17 +33,11 @@ export default function Form(){
                 </View>
                 <View style={styles.containerWeight}>
                     <FontAwesome5 name="weight" size={24} color="black" />
+                    <TextInput placeholder="Gewicht (Kilogramm)" style={styles.input} keyboardType='numeric' />
                 </View>
                 <View style={styles.containerHeight}>
                     <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
-                    <Picker
-                        selectedValue={selectedValue}
-                        style={{ height: 20, width: 200 }}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                    >
-                        <Picker.Item label="2000" value="2000" />
-                        <Picker.Item label="2001" value="2001" />
-                </Picker>
+                    <TextInput placeholder="Grösse (CM)" style={styles.input} keyboardType='numeric' />
                 </View>
             </View>
         </View>
@@ -149,12 +113,6 @@ const styles = StyleSheet.create({
         width:320,
         marginBottom:20,
     },
-    choseDate:{
-        color:"black",
-        fontSize:18,
-        fontWeight:"300",
-        marginLeft:10,
-    },
     genderSelector:{
         flexDirection:"row",
         flex:1,
@@ -195,6 +153,11 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         backgroundColor:"#0cb5f2",
         marginEnd:5,
+    },
+    input:{
+        width:320,
+        marginLeft:15,
+        marginTop:-1,
     },
 });
 
