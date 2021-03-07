@@ -3,7 +3,6 @@ import { StyleSheet, Text, View,TouchableOpacity,Picker,TextInput } from "react-
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function Form(){
     const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
@@ -39,6 +38,9 @@ export default function Form(){
                     <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
                     <TextInput placeholder="Grösse (CM)" style={styles.input} keyboardType='numeric' />
                 </View>
+                <TouchableOpacity style={styles.confirm}>
+                    <Text style={{color:"white"}}>Fortfahren</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
         width:320,
         marginTop:10,
         marginBottom:10,
-        alignItems:"center"
+        alignItems:"center",
     },  
     holder:{
         flex:1,
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:"center",
         justifyContent:"center",
-        backgroundColor:"#eb3b3b",
+        backgroundColor:"#ed5885",
     },
     maleContainerSelected:{
         borderRadius:10,
@@ -158,6 +160,17 @@ const styles = StyleSheet.create({
         width:320,
         marginLeft:15,
         marginTop:-1,
+    },
+    confirm:{
+        borderBottomColor:"black",
+        backgroundColor:"black",
+        borderRadius:20,
+        padding:12,
+        width:320,
+        marginBottom:20,
+        flex:0,
+        alignItems:"center",
+        justifyContent:"center",
     },
 });
 
