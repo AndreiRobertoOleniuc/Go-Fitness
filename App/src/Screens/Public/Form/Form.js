@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function Form(){
+export default function Form({navigation}){
     const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
     const [styleFemale,setStyleFemale] = useState([styles.femaleContainer,"grey"]);
 
@@ -22,7 +22,7 @@ export default function Form(){
             <View style={styles.holder}>
                 <View style={styles.containerAge}>
                     <MaterialIcons name="date-range" size={24} color="black" />
-                    <TextInput placeholder="Geburtsdatum (Format 10-06-2005)" style={styles.input} keyboardType='numeric' />
+                    <TextInput placeholder="Geburtsdatum (Format 10.06.2005)" style={styles.input} keyboardType='numeric' />
                 </View>
                 <View style={styles.containerGender}>
                     <View style={styles.genderSelector}>
@@ -38,7 +38,7 @@ export default function Form(){
                     <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
                     <TextInput placeholder="Grösse (CM)" style={styles.input} keyboardType='numeric' />
                 </View>
-                <TouchableOpacity style={styles.confirm}>
+                <TouchableOpacity style={styles.confirm} onPress={() => navigation.navigate('PAL')}>
                     <Text style={{color:"white"}}>Fortfahren</Text>
                 </TouchableOpacity>
             </View>
@@ -139,22 +139,34 @@ const styles = StyleSheet.create({
     },
     femaleContainerSelected:{
         borderRadius:10,
-        borderColor:"white",
-        borderWidth:1,
         flex:1,
         alignItems:"center",
         justifyContent:"center",
         backgroundColor:"#ed5885",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     maleContainerSelected:{
         borderRadius:10,
-        borderColor:"white",
-        borderWidth:1,
         flex:1,
         alignItems:"center",
         justifyContent:"center",
         backgroundColor:"#0cb5f2",
         marginEnd:5,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     input:{
         width:320,

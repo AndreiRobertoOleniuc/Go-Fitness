@@ -1,68 +1,48 @@
-import React,{useState} from "react";
-import { StyleSheet, Text, View,TextInput,TouchableOpacity } from "react-native";
-import axios from "axios";
+import React from 'react';
+import { View, KeyboardAvoidingView, TextInput, StyleSheet, Text, Platform, TouchableWithoutFeedback, Button, Keyboard  } from 'react-native';
 
-export default function Home({navigation}){
-    return(
-        <View style={styles.container}>
-            <View>
-                <Text style={styles.title}>Home</Text>
-            </View>
+const KeyboardAvoidingComponent = () => {
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          <Text style={styles.header}>Header</Text>
+          <TextInput placeholder="Username" style={styles.textInput} />
+          <View style={styles.btnContainer}>
+            <Button title="Submit" onPress={() => null} />
+          </View>
         </View>
-    )
-}
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );
+};
 
-//Styling
 const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        flexDirection:"column",
-        alignItems:"center",
-        backgroundColor:"#f5f5f5",        
-    },
-    title: {
-        color: 'black',
-        fontWeight: 'bold',
-        fontSize: 30,
-        marginTop:100,
-        marginBottom:150,
-    },
-    input:{
-        height:40,
-        width:320,
-        borderRadius:10,
-        backgroundColor:"#dedcdc",
-        padding:12,
-        marginBottom:10,
-    }, 
-    greet:{
-        margin:5,
-        opacity:0.5,
-        fontSize:20,
-    },
-    login:{
-        borderRadius:20,
-        backgroundColor:"black",
-        height:40,
-        padding:12,
-        width:320,
-        marginTop:10,
-        marginBottom:10,
-        alignItems:"center"
-    },
-    btnContainer:{
-        flex:1,
-        flexDirection:"column",
-        alignItems:"center",
-    },  
-    whiteText:{
-        color:"white",
-    },
-    signUpContainer:{
-        flex:1,
-        flexDirection:"row",
-    },
-    signUp:{
-        color:"grey",
-    }
+  container: {
+    flex: 1
+  },
+  inner: {
+    padding: 24,
+    flex: 1,
+    justifyContent: "space-around"
+  },
+  header: {
+    fontSize: 36,
+    marginBottom: 48
+  },
+  textInput: {
+    height: 40,
+    borderColor: "#000000",
+    borderBottomWidth: 1,
+    marginBottom: 36
+  },
+  btnContainer: {
+    backgroundColor: "white",
+    marginTop: 12
+  }
 });
+
+export default KeyboardAvoidingComponent;
