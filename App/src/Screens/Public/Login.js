@@ -6,7 +6,7 @@ export default function Login({navigation}){
     const [username,setUsername] = useState();
     const [password,setPassword] = useState();
     const login = async ()=>{
-        
+        navigation.navigate("HomePage");
     }
     const changeUsername = (e) => setUsername(e.target.value);
     const changePassword = (e) => setPassword(e.target.value);

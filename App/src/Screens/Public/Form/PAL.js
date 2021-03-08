@@ -50,7 +50,7 @@ export default function PAL({navigation}){
                 </View>
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.register} onPress={()=>navigation.navigate('Ziele')}>
+                <TouchableOpacity style={styles.register} onPress={()=>navigation.navigate('HomePage')}>
                     <Text style={styles.whiteText}>Fertigstellen</Text>
                 </TouchableOpacity>
             </View>

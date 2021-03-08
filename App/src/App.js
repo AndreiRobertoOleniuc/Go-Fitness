@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from "./Screens/Public/Login";
 import SignUp from "./Screens/Public/Registrieren";
 import Form from "./Screens/Public/Form/Form";
-import Home from "./Screens/Private/Home";
+import Container from "./Screens/Private/AppContainer";
 import Ziel from "./Screens/Public/Form/Ziel";
 import PAL from './Screens/Public/Form/PAL';
 const Stack = createStackNavigator();
@@ -20,10 +20,27 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home" screenOptions={{
+        <Stack.Navigator initialRouteName="Login" screenOptions={{
             headerShown: false
           }}>
-          <Stack.Screen name="PAL" component={PAL} />
+          <Stack.Screen name="Login" >
+              {props => <Login {...props}/>}
+          </Stack.Screen>
+          <Stack.Screen name="Sign Up" >
+            {props => <SignUp {...props}/>}
+          </Stack.Screen>
+          <Stack.Screen name="Ziele" >
+          {props => <Ziel {...props}/>}
+          </Stack.Screen>
+          <Stack.Screen name="Form" >
+          {props => <Form {...props}/>}
+          </Stack.Screen>
+          <Stack.Screen name="PAL" >
+          {props => <PAL {...props}/>}
+          </Stack.Screen>
+          <Stack.Screen name="HomePage" >
+          {props => <Container {...props}/>}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
   );

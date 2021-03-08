@@ -18,7 +18,14 @@ export default function Form({navigation}){
     }
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>Wir brauchen noch ein paar Infos</Text>
+            <Text style={styles.title}>Jetzt brauchen wir noch</Text>
+            <Text style={{color: 'black',
+                fontWeight: '400',
+                fontSize: 20,
+                marginBottom:40,}}
+                >
+                Ihre Daten
+            </Text>
             <View style={styles.holder}>
                 <View style={styles.containerAge}>
                     <MaterialIcons name="date-range" size={24} color="black" />
@@ -55,10 +62,9 @@ const styles = StyleSheet.create({
     },
     title: {
         color: 'black',
-        fontWeight: 'bold',
-        fontSize: 22,
+        fontWeight: '400',
+        fontSize: 20,
         marginTop:80,
-        marginBottom:40,
     },
     btn:{
         borderRadius:20,
