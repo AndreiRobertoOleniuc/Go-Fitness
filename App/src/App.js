@@ -12,10 +12,6 @@ const Stack = createStackNavigator();
 //Icons https://icons.expo.fyi/
 
 /*
-<Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Sign Up" component={SignUp} />
-          <Stack.Screen name="Ziele" component={Ziel}/>
-          <Stack.Screen name="Form" component={Form} />
 */
 export default function App() {
   return (
@@ -24,22 +20,22 @@ export default function App() {
             headerShown: false
           }}>
           <Stack.Screen name="Login" >
-              {props => <Login {...props}/>}
+            {props => <Login {...props}/>}
           </Stack.Screen>
           <Stack.Screen name="Sign Up" >
             {props => <SignUp {...props}/>}
           </Stack.Screen>
           <Stack.Screen name="Ziele" >
-          {props => <Ziel {...props}/>}
+            {props => <Ziel {...props}/>}
           </Stack.Screen>
           <Stack.Screen name="Form" >
-          {props => <Form {...props}/>}
+            {props => <Form {...props}/>}
           </Stack.Screen>
           <Stack.Screen name="PAL" >
-          {props => <PAL {...props}/>}
+            {props => <PAL {...props}/>}
           </Stack.Screen>
           <Stack.Screen name="HomePage" >
-          {props => <Container {...props}/>}
+            {props => <Container {...props}/>}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
