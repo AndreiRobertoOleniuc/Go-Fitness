@@ -3,29 +3,40 @@ import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-export default function Ziele(){
-    const [chosen,setChosen] = useState(true);
+export default function Ziele({navigation}){
+    const [gewichtAbnahmenStyle,setGewichtAbnehmenStyle] = useState([styles.choice,"rgba(135, 137, 140,0.5)",styles.title,styles.descriptionText]);
+    const [gewichtZunehmenStyle,setGewichtZunehmenStyle] = useState([styles.choice,"rgba(135, 137, 140,0.5)",styles.title,styles.descriptionText]);
+    const changeToZunehmen = ()=>{
+        setGewichtZunehmenStyle([styles.choiceSelected,"#ffffff",styles.titleSelected,styles.descriptionTextSelected]);
+        setGewichtAbnehmenStyle([styles.choice,"rgba(135, 137, 140,0.5)",styles.title,styles.descriptionText]);
+    }
+    const changeToAbnehmen = ()=>{
+        setGewichtAbnehmenStyle([styles.choiceSelected,"#ffffff",styles.titleSelected,styles.descriptionTextSelected]);
+        setGewichtZunehmenStyle([styles.choice,"rgba(135, 137, 140,0.5)",styles.title,styles.descriptionText]);
+    }
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.gain}>
-                <Text style={{fontSize:18,color:"rgb(135, 137, 140)",marginBottom:10}}>Gewicht abnehmen</Text>
-                <View style={styles.makeRow}>
-                    <FontAwesome5 name="minus" size={24} color="rgba(135, 137, 140,0.5)" />
-                    <MaterialCommunityIcons name="weight-kilogram" size={50} color="rgba(135, 137, 140,0.5)" />
-                </View>
-                <View style={styles.description}>
-                    <Text style={styles.descriptionText}>Mit diesem Programm verlieren sie gesund Gewicht</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.lose}>
-                <Text style={{fontSize:18,color:"rgb(135, 137, 140)",marginBottom:10}}>Gewicht zunehmen</Text>
-                <View style={styles.makeRow}>
-                    <FontAwesome5 name="plus" size={24} color={chosen ? ("rgba(0, 137, 140,1)"):("rgba(135, 137, 140,0.5)")} />
-                    <MaterialCommunityIcons name="weight-kilogram" size={50} color="rgba(135, 137, 140,0.5)" />
-                </View>
-                <View style={styles.description}>
-                    <Text style={styles.descriptionText}>Mit diesem Programm nehmen sie gesund Gewicht zu</Text>
-                </View>
+            <View>
+                <Text style={styles.frage}>Was ist ihr Ziel mit dieser App</Text>
+            </View>
+            <View style={styles.choiceContainer}>
+                <TouchableOpacity style={gewichtZunehmenStyle[0]} onPress={changeToZunehmen}>
+                    <Text style={gewichtZunehmenStyle[2]}>Gewicht zunehmen</Text>
+                    <View style={styles.makeRow}>
+                        <FontAwesome5 name="plus" size={24} color={gewichtZunehmenStyle[1]} />
+                        <MaterialCommunityIcons name="weight-kilogram" size={50} color={gewichtZunehmenStyle[1]} />
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={gewichtAbnahmenStyle[0]} onPress={changeToAbnehmen}>
+                    <Text style={gewichtAbnahmenStyle[2]}>Gewicht abnehmen</Text>
+                    <View style={styles.makeRow}>
+                        <FontAwesome5 name="minus" size={24} color={gewichtAbnahmenStyle[1]} />
+                        <MaterialCommunityIcons name="weight-kilogram" size={50} color={gewichtAbnahmenStyle[1]} />
+                    </View>
+                </TouchableOpacity> 
+            </View>
+            <TouchableOpacity style={styles.weiter} onPress={()=>navigation.navigate('Form')}>
+                <Text style={{color:"white"}}>Weiterfahren</Text>
             </TouchableOpacity>
         </View>
     )
@@ -34,26 +45,38 @@ export default function Ziele(){
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        flexDirection:"row",
-        alignItems:"center",
+        flexDirection:"column",
+        alignItems:"stretch",
+        justifyContent:"center",
         backgroundColor:"#f5f5f5",
-        justifyContent:"space-around",      
+    },
+    choiceContainer:{
+        flex:0,
+        flexDirection:"row",
+        backgroundColor:"#f5f5f5",
+        justifyContent:"space-around",
+    },
+    frage:{
+        fontSize:20,
+        marginBottom:40,
+        fontWeight:"300",
+        marginHorizontal:60,
+    },
+    weiter:{
+        backgroundColor:"black",
+        marginTop:50,
+        marginHorizontal:90,
+        borderRadius:20,
+        padding:13,
+        flex:0,
+        alignItems:"center",
+        justifyContent:"center",
     },
     makeRow:{
         flex:0,
         flexDirection:"row",
     },  
-    gain:{
-        flex:0,
-        width:180,
-        height:300,
-        borderRadius:20,
-        borderWidth:3,
-        borderColor:"rgba(135, 137, 140,0.5)",
-        alignItems:"center",
-        justifyContent:"center",
-    },
-    lose:{
+    choice:{
         flex:0,
         width:180,
         height:300,
@@ -71,5 +94,35 @@ const styles = StyleSheet.create({
     },
     descriptionText:{
         color:"rgb(135, 137, 140)",
-    },  
+    },
+    title:{
+        fontSize:18,
+        color:"rgb(135, 137, 140)",
+        marginBottom:10,
+    },
+    choiceSelected:{
+        flex:0,
+        width:180,
+        height:300,
+        borderRadius:20,
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:"black",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    titleSelected:{
+        fontSize:18,
+        color:"#ffffff",
+        marginBottom:10,
+    },
+    descriptionTextSelected:{
+        color:"#ffffff",
+    },
 });

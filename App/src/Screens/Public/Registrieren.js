@@ -18,7 +18,7 @@ export default function Registrieren({navigation}){
                 <TextInput placeholder="Password" style={styles.input} secureTextEntry={true}/>  
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.register} onPress={()=>navigation.navigate('Form')}>
+                <TouchableOpacity style={styles.register} onPress={()=>navigation.navigate('Ziele')}>
                     <Text style={styles.whiteText}>Register</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.loginContainer}>
