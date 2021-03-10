@@ -1,22 +1,9 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
+import HomeScreen from "./Screen/HomeScreen";
+import Settings from "./Screen/Settings";
+import TageBuch from  "./Screen/Tagebuch";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +15,8 @@ export default function AppContainer({userID,credentials}) {
   return (
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Tagebuch" component={TageBuch} />
+        <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
   );
 }
