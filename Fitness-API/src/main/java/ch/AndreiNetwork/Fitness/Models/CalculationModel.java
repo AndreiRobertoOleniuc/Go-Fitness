@@ -1,5 +1,8 @@
 package ch.AndreiNetwork.Fitness.Models;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class CalculationModel {
@@ -20,14 +23,27 @@ public class CalculationModel {
         return ((stunden.get(0) * 0.95) + (stunden.get(1) * 1.2) + (stunden.get(2) * 1.45) + (stunden.get(3) * 1.65) + (stunden.get(4) * 1.85) + (stunden.get(5) * 2.2)) / 24;
     }
 
-    public double gainWeight(boolean gender, double weight, double height, double age,List<Double> stunden){
-        double calories = getBaseCalorie(gender,weight,height,age);
+    public int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+        if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(birthDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+    public double gainWeight(boolean gender, double weight, double height, Date age, List<Double> stunden){
+        LocalDate birthday = age.toLocalDate();
+        LocalDate today = LocalDate.now();
+        int years = calculateAge(birthday,today);
+        double calories = getBaseCalorie(gender,weight,height,years);
         calories*=getPAL(stunden);
         calories+=400;
         return calories;
     }
-    public double loseWeight(boolean gender, double weight, double height, double age, List<Double> stunden){
-        double calories = getBaseCalorie(gender,weight,height,age);
+    public double loseWeight(boolean gender, double weight, double height, Date age, List<Double> stunden){
+        LocalDate  birthday = age.toLocalDate();
+        LocalDate today = LocalDate.now();
+        int years = calculateAge(birthday,today);
+        double calories = getBaseCalorie(gender,weight,height,years);
         calories*=getPAL(stunden);
         calories-=550;
         return calories;

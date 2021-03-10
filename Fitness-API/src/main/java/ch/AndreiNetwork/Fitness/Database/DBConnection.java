@@ -23,10 +23,7 @@ public class DBConnection {
     }
 
     public java.sql.Connection createConnection() throws SQLException, ClassNotFoundException, SQLException {
-        if (cn == null) {
-            Class.forName(DRIVER);
-            cn =  DriverManager.getConnection(DB_CONNECTION_STRING, USERNAME, PASSWORD);
-        }
+        cn =  DriverManager.getConnection(DB_CONNECTION_STRING, USERNAME, PASSWORD);
         return cn;
     }
 

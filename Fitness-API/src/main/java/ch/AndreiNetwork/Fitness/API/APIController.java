@@ -50,40 +50,21 @@ public class APIController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/public/fillData")
-    public boolean fillData(@RequestBody FillDataPayLoad payLoad ){
-        return false;
-    }
-
-
-    //Restart API on Windows, Linux still TODO
-    @CrossOrigin(origins = "*")
-    @GetMapping("/api/public/restart")
-    public String updateProject() throws IOException {
-        int iExitValue;
-        String sCommandString;
-        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        if(isWindows){
-            try{
-                System.out.println("Windows");
-                Process process = Runtime.getRuntime().exec("cmd /c start C:\\Automation\\Update.bat");
-            }catch(IOException e){
-                e.printStackTrace();
-            }
+    @PostMapping("/api/public/fillData")
+    public boolean getCalorie(
+            @RequestParam(value = "id",defaultValue = "0") int id,
+            @RequestParam(value = "goal",defaultValue = "0") String goal,
+            @RequestParam(value = "gender",defaultValue = "0") boolean gender,
+            @RequestParam(value = "weight",defaultValue = "0") double weight,
+            @RequestParam(value = "height",defaultValue = "0") double height,
+            @RequestBody FillDataPayLoad otherData) throws SQLException, ClassNotFoundException {
+        double calories;
+        if(goal.equals("zunehmen")){
+            calories = new CalculationModel().gainWeight(gender,weight,height,otherData.getBirthday(),otherData.getStunden());
         }else{
-            System.out.println("Linux");
-            new GitModel().pull();
-            try
-            {
-                Thread.sleep(5000);
-                FitnessApiApplication.restart();
-            }
-            catch(InterruptedException ex)
-            {
-                Thread.currentThread().interrupt();
-            }
+            calories = new CalculationModel().loseWeight(gender,weight,height,otherData.getBirthday(),otherData.getStunden());
         }
-        return "OK";
+        return new DBActions().fillData(id,goal,gender,weight,height,otherData.getBirthday(),calories);
+
     }
 }
-

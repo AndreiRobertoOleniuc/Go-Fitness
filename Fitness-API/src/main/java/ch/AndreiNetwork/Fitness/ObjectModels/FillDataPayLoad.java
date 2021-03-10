@@ -1,45 +1,30 @@
 package ch.AndreiNetwork.Fitness.ObjectModels;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class FillDataPayLoad {
-    int id;
-    String goal;
-    boolean gender;
-    double weight;
-    double height;
     Date birthday;
+    ArrayList<Double> stunden;
 
-    public FillDataPayLoad(int id, String goal, boolean gender, double weight, double height, Date birthday) {
-        this.id = id;
-        this.goal = goal;
-        this.gender = gender;
-        this.weight = weight;
-        this.height = height;
+    public FillDataPayLoad(Date birthday, ArrayList<Double> stunden) {
         this.birthday = birthday;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getGoal() {
-        return goal;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public double getHeight() {
-        return height;
+        this.stunden = stunden;
     }
 
     public Date getBirthday() {
         return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public ArrayList<Double> getStunden() {
+        return stunden;
+    }
+
+    public void setStunden(ArrayList<Double> stunden) {
+        this.stunden = stunden;
     }
 }

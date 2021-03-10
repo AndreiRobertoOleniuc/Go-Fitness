@@ -3,6 +3,7 @@ package ch.AndreiNetwork.Fitness.API;
 import ch.AndreiNetwork.Fitness.Models.CalculationModel;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -101,7 +102,9 @@ public class FormulaTests {
     //New Formula
     @Test
     public void testNewFormula3() {
-        double cal = new CalculationModel().loseWeight(false, 55, 153, 17,Arrays.asList(10.0, 2.0, 7.0, 2.0, 1.0, 2.0));
+        String str="2002-02-21";
+        Date date=Date.valueOf(str);
+        double cal = new CalculationModel().loseWeight(false, 55, 153, date,Arrays.asList(10.0, 2.0, 7.0, 2.0, 1.0, 2.0));
         System.out.println(cal);
     }
 }
