@@ -4,18 +4,34 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function Form({navigation,setUserData}){
+export default function Form({navigation,setUserData,userData}){
     const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
     const [styleFemale,setStyleFemale] = useState([styles.femaleContainer,"grey"]);
-
     const changeToMale= ()=>{
         setStyleMale([styles.maleContainerSelected,"white"]);
         setStyleFemale([styles.femaleContainer,"grey"]);
-        
+        setUserData([userData[0],true,userData[2],userData[3],userData[4],userData[5]]);
     }
     const changeToFemale= ()=>{
         setStyleFemale([styles.femaleContainerSelected,"white"]);
         setStyleMale([styles.maleContainer,"grey"]);
+        setUserData([userData[0],false,userData[2],userData[3],userData[4],userData[5]]);
+    }
+    const [geburtDatum,setGeburtsDatum] = useState();
+    const [weight,setWeight] = useState();
+    const [height,setHeight] = useState();
+
+    const changeGeburtsdatum = (e)=> setGeburtsDatum(e.target.value.replaceAll(".","-"));
+    const changeWeight = (e) => setWeight(e.target.value);
+    const changeHeight = (e) => setHeight(e.target.value);
+
+    const weiter = ()=>{
+        if(geburtDatum==null||weight==null||height==null||userData[1]==="gender"){
+            navigation.navigate("Form");
+        }else{
+            setUserData([userData[0],userData[1],weight,height,geburtDatum,userData[5]]);
+            navigation.navigate("PAL");
+        }
     }
     return(
         <View style={styles.container}>
@@ -30,7 +46,7 @@ export default function Form({navigation,setUserData}){
             <View style={styles.holder}>
                 <View style={styles.containerAge}>
                     <MaterialIcons name="date-range" size={24} color="black" />
-                    <TextInput placeholder="Geburtsdatum (Format 10.06.2005)" style={styles.input} keyboardType='numeric' />
+                    <TextInput placeholder="Geburtsdatum (Format 2005.06.10)" style={styles.input} keyboardType='numeric' onChange={changeGeburtsdatum}/>
                 </View>
                 <View style={styles.containerGender}>
                     <View style={styles.genderSelector}>
@@ -40,13 +56,13 @@ export default function Form({navigation,setUserData}){
                 </View>
                 <View style={styles.containerWeight}>
                     <FontAwesome5 name="weight" size={24} color="black" />
-                    <TextInput placeholder="Gewicht (Kilogramm)" style={styles.input} keyboardType='numeric' />
+                    <TextInput placeholder="Gewicht (Kilogramm)" style={styles.input} keyboardType='numeric' onChange={changeWeight} />
                 </View>
                 <View style={styles.containerHeight}>
                     <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
-                    <TextInput placeholder="Grösse (CM)" style={styles.input} keyboardType='numeric' />
+                    <TextInput placeholder="Grösse (CM)" style={styles.input} keyboardType='numeric' onChange={changeHeight}/>
                 </View>
-                <TouchableOpacity style={styles.confirm} onPress={() => navigation.navigate('PAL')}>
+                <TouchableOpacity style={styles.confirm} onPress={weiter}>
                     <Text style={{color:"white"}}>Fortfahren</Text>
                 </TouchableOpacity>
             </View>

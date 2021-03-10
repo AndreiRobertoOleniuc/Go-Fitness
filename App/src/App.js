@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from "./Screens/Public/Login";
@@ -12,14 +12,7 @@ const Stack = createStackNavigator();
 //Icons https://icons.expo.fyi/
 
 export default function App() {
-  const [userData,setUserData] = useState({
-    goal:null,
-    gender:null,
-    weight:null,
-    height:null,
-    birthday:null,
-    studen:null
-  });
+  const [userData,setUserData] = useState(["goal","gender","weight","height","birthday","stunden"]);
   const [credentials,setCredentials] = useState({});
   const [userID,setUserID] = useState();
   return (
@@ -34,10 +27,10 @@ export default function App() {
             {props => <SignUp {...props} setUserID={setUserID} setCredentials={setCredentials}/>}
           </Stack.Screen>
           <Stack.Screen name="Ziele" >
-            {props => <Ziel {...props} setUserData={setUserData}/>}
+            {props => <Ziel {...props} userData={userData} setUserData={setUserData}/>}
           </Stack.Screen>
           <Stack.Screen name="Form" >
-            {props => <Form {...props} setUserData={setUserData}/>}
+            {props => <Form {...props} userData={userData} setUserData={setUserData}/>}
           </Stack.Screen>
           <Stack.Screen name="PAL" >
             {props => <PAL {...props} setUserData={setUserData} userID={userID} userData={userData}/>}
