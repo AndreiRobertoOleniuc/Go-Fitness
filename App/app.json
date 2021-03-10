@@ -1,12 +1,15 @@
 {
-  "name": "App",
-  "displayName": "App",
   "expo": {
-    "name": "App",
-    "slug": "App",
+    "name": "GoFitME",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "slug": "gofitme",
+    "ios": {
+      "bundleIdentifier": "com.andrei.gofitme",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.andrei.gofitme",
+      "versionCode": 1
+    }
   }
 }
