@@ -3,7 +3,6 @@ package ch.AndreiNetwork.Fitness.ObjectModels;
 import java.util.ArrayList;
 
 public class User {
-    private String fullName;
     private String username;
     private String email;
     private String password;
@@ -13,15 +12,10 @@ public class User {
     private int age = 0;
     private ArrayList<Double> pal;
 
-    public User(String fullName, String username, String email, String password) {
-        this.fullName = fullName;
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-    }
-
-    public String getFullName() {
-        return fullName;
     }
 
     public String getUsername() {
@@ -54,10 +48,6 @@ public class User {
 
     public ArrayList<Double> getPal() {
         return pal;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public void setUsername(String username) {

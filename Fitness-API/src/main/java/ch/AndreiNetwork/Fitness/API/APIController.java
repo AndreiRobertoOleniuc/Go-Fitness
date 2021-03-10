@@ -1,8 +1,10 @@
 package ch.AndreiNetwork.Fitness.API;
 
+import ch.AndreiNetwork.Fitness.Database.DBActions;
 import ch.AndreiNetwork.Fitness.Models.CalculationModel;
 import ch.AndreiNetwork.Fitness.Models.GitModel;
 import ch.AndreiNetwork.Fitness.Models.UserModel;
+import ch.AndreiNetwork.Fitness.ObjectModels.FillDataPayLoad;
 import ch.AndreiNetwork.Fitness.ObjectModels.LoginPayload;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController
@@ -33,32 +36,25 @@ public class APIController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/login")
     public LoginPayload login(@RequestParam(value = "username",defaultValue = "0") String username,
-                              @RequestParam(value = "password",defaultValue = "0") String password)  {
+                              @RequestParam(value = "password",defaultValue = "0") String password) throws SQLException, ClassNotFoundException {
         return uM.login(username,password);
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/api/public/register")
-    public boolean registration(
-            @RequestParam(value = "name",defaultValue = "0") String name,
+    public LoginPayload registration(
             @RequestParam(value = "email",defaultValue = "0") String email,
             @RequestParam(value = "username",defaultValue = "0") String username,
-            @RequestParam(value = "password",defaultValue = "0") String password)  {
-        return uM.register(name,username,email,password);
+            @RequestParam(value = "password",defaultValue = "0") String password) throws SQLException, ClassNotFoundException {
+        return uM.register(username,email,password);
     }
 
-    //Get Base Calorie (no gain no loss)
     @CrossOrigin(origins = "*")
-    @PostMapping("/api/public/getCalorie")
-    public double getCalorie(@RequestParam(value = "gender",defaultValue = "true") boolean gender,
-                             @RequestParam(value = "weight",defaultValue = "0") double weight,
-                             @RequestParam(value = "height",defaultValue = "0") double height,
-                             @RequestParam(value = "age",defaultValue = "0") double age,
-                             @RequestBody ArrayList<Double> stunden){
-        double mittelWert = new CalculationModel().getBaseCalorie(gender,weight,height,age);
-        mittelWert*= new CalculationModel().getPAL(stunden);
-        return mittelWert;
+    @GetMapping("/api/public/fillData")
+    public boolean fillData(@RequestBody FillDataPayLoad payLoad ){
+        return false;
     }
+
 
     //Restart API on Windows, Linux still TODO
     @CrossOrigin(origins = "*")

@@ -100,11 +100,8 @@ public class FormulaTests {
 
     //New Formula
     @Test
-    public void testNewFormula2() {
-        double cal;
-        double base = new CalculationModel().getBaseCalorie(false, 55, 153, 17);
-        ArrayList<Double> numbers = new ArrayList<Double>(Arrays. asList(10.0, 2.0, 7.0, 2.0, 1.0, 2.0));
-        cal = base * new CalculationModel().getPAL(numbers);
-        assertEquals(1815, (int) cal);
+    public void testNewFormula3() {
+        double cal = new CalculationModel().loseWeight(false, 55, 153, 17,Arrays.asList(10.0, 2.0, 7.0, 2.0, 1.0, 2.0));
+        System.out.println(cal);
     }
 }

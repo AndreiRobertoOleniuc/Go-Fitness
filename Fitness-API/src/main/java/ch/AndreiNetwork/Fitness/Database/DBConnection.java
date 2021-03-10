@@ -7,7 +7,7 @@ public class DBConnection {
     private static DBConnection instance = null;
     private final String USERNAME = "root";
     private final String PASSWORD = "";
-    private final String DB_CONNECTION_STRING = "jdbc:mysql://localhost/wheeloffortune";
+    private final String DB_CONNECTION_STRING = "jdbc:mysql://localhost/gofitness";
     private final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private java.sql.Connection cn = null;
 
