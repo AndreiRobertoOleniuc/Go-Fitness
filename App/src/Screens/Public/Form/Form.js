@@ -1,16 +1,17 @@
-import React,{useState,useEffect} from "react";
-import { StyleSheet, Text, View,TouchableOpacity,Picker,TextInput } from "react-native";
+import React,{useState} from "react";
+import { StyleSheet, Text, View,TouchableOpacity,TextInput } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function Form({navigation}){
+export default function Form({navigation,setUserData}){
     const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
     const [styleFemale,setStyleFemale] = useState([styles.femaleContainer,"grey"]);
 
     const changeToMale= ()=>{
         setStyleMale([styles.maleContainerSelected,"white"]);
         setStyleFemale([styles.femaleContainer,"grey"]);
+        
     }
     const changeToFemale= ()=>{
         setStyleFemale([styles.femaleContainerSelected,"white"]);

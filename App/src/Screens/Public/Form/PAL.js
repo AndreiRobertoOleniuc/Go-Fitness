@@ -7,7 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function PAL({navigation}){
+export default function PAL({navigation,setUserData,userID,userData}){
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container} bounces={false}>
             <View style={{marginBottom:10}}>

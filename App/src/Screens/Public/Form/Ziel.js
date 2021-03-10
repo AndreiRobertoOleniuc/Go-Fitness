@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-export default function Ziele({navigation}){
+export default function Ziele({navigation,setUserData}){
     const [gewichtAbnahmenStyle,setGewichtAbnehmenStyle] = useState([styles.choice,"rgba(135, 137, 140,0.5)",styles.title,styles.descriptionText]);
     const [gewichtZunehmenStyle,setGewichtZunehmenStyle] = useState([styles.choice,"rgba(135, 137, 140,0.5)",styles.title,styles.descriptionText]);
     const changeToZunehmen = ()=>{

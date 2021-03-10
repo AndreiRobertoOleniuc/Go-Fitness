@@ -20,7 +20,7 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export default function AppContainer() {
+export default function AppContainer({userID,credentials}) {
   return (
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />

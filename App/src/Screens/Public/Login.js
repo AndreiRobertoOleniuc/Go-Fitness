@@ -2,11 +2,27 @@ import React,{useState} from "react";
 import { StyleSheet, Text, View,TextInput,TouchableOpacity } from "react-native";
 import axios from "axios";
 
-export default function Login({navigation}){
+export default function Login({navigation,setUserID,setCredentials}){
     const [username,setUsername] = useState();
     const [password,setPassword] = useState();
     const login = async ()=>{
-        navigation.navigate("HomePage");
+        axios.get(`http://localhost:8080/api/public/login?username=${username}&password=${password}`)
+        .then((res)=>{
+            if(res.data.loggedIn){
+                setCredentials({
+                    uname:username,
+                    upassword:password
+                })
+                setUserID(res.data.userID);
+                if(res.data.dataFilled){
+                    navigation.navigate("HomePage");
+                }else{
+                    navigation.navigate("Ziele");
+                }
+            }else{
+                navigation.navigate("Login");
+            }
+        })
     }
     const changeUsername = (e) => setUsername(e.target.value);
     const changePassword = (e) => setPassword(e.target.value);
