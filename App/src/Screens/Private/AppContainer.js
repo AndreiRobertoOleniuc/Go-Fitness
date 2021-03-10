@@ -21,6 +21,10 @@ function SettingsScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function AppContainer({userID,credentials}) {
+  React.useEffect(()=>{
+    console.log(userID);
+    console.log(credentials);
+  },[]);
   return (
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />

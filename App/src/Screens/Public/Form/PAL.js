@@ -26,7 +26,6 @@ export default function PAL({navigation,userID,userData,setUserData}){
                 stunden:stunden
             })
             .then((res)=>{
-                console.log(res.data);
                 navigation.navigate("HomePage");
             })
             .catch((err)=>{
