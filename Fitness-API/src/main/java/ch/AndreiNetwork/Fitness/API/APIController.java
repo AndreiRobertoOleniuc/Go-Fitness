@@ -6,18 +6,9 @@ import ch.AndreiNetwork.Fitness.Models.GitModel;
 import ch.AndreiNetwork.Fitness.Models.UserModel;
 import ch.AndreiNetwork.Fitness.ObjectModels.FillDataPayLoad;
 import ch.AndreiNetwork.Fitness.ObjectModels.LoginPayload;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 @RestController
 public class APIController {
