@@ -17,10 +17,6 @@ export default function Essen() {
             console.log(err);
         })
     }
-    const changeInput = (e)=>{
-        console.log(e.target.value);
-        setInput(e.target.value);
-    } 
     return (
         <View style={styles.container}>
             <View  style={styles.title}>
@@ -28,7 +24,7 @@ export default function Essen() {
             </View>
             <View style={styles.search}>
                 <FontAwesome name="search" size={24} color="black" />
-                <TextInput placeholder="Nahrungsmittel suchen (English)" style={styles.input} onChange={changeInput}/>
+                <TextInput placeholder="Nahrungsmittel suchen (English)" style={styles.input} onChangeText={text => console.log(text)}/>
                 <TouchableOpacity style={styles.searchBtn} onPress={searchFood}>
                     <Text style={styles.searchBtnTxt}>Suchen</Text>
                 </TouchableOpacity>
