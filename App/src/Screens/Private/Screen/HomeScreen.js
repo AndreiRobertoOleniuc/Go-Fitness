@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     },
     title:{
         backgroundColor:"#121212",
-        marginTop:30,
         fontSize:25,
         fontWeight:"400",
         alignSelf:"center",
@@ -93,6 +92,7 @@ const styles = StyleSheet.create({
     },
     titleText:{
         fontSize:30,
+        marginTop:30,
         fontWeight:"700",
         alignSelf:"baseline",
         color:"#ffffff",
