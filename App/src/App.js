@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from "./Screens/Public/Login";
@@ -20,10 +20,10 @@ export default function App() {
             headerShown: false
           }}>
           <Stack.Screen name="Login" >
-            {props => <Login {...props}/>}
+            {props => <Login {...props} />}
           </Stack.Screen>
           <Stack.Screen name="Sign Up" >
-            {props => <SignUp {...props}/>}
+            {props => <SignUp {...props} />}
           </Stack.Screen>
           <Stack.Screen name="Ziele" >
             {props => <Ziel {...props}/>}
@@ -32,10 +32,10 @@ export default function App() {
             {props => <Form {...props}/>}
           </Stack.Screen>
           <Stack.Screen name="PAL" >
-            {props => <PAL {...props}/>}
+            {props => <PAL {...props} />}
           </Stack.Screen>
           <Stack.Screen name="HomePage" >
-            {props => <Container {...props}/>}
+            {props => <Container {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
