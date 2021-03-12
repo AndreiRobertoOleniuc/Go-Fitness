@@ -1,34 +1,17 @@
 import React,{useState} from "react";
 import { StyleSheet, Text, View,TextInput,TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import axios from "axios";
+import {useAuth} from "./AuthProvider";
 
-export default function Registrieren({navigation,setCredentials,setUserID}){
+export default function Registrieren({navigation}){
     const [email,setEmail] = useState();
-    const [username,setUsername] = useState();
     const [password,setPassword] = useState();
+    const {signup} = useAuth();
 
-    const register = async ()=>{
-        axios.get(`http://localhost:8080/api/public/register?email=${email}&username=${username}&password=${password}`)
-        .then((res)=>{
-            if(res.data.loggedIn){
-                setCredentials({
-                    uname:username,
-                    upassword:password
-                })
-                setUserID(res.data.userID);
-                navigation.navigate("Ziele");
-            }else{
-                navigation.navigate("Sign Up");
-            }
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
+    const register = (e)=>{
+        e.preventDefault();
+        signup(email,password);
     }
-    const changeEmail = (e) => setEmail(e.target.value);
-    const changeUsername = (e)=> setUsername(e.target.value);
-    const changePassword = (e) => setPassword(e.target.value);
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container} bounces={false}>
             <View>
@@ -37,11 +20,9 @@ export default function Registrieren({navigation,setCredentials,setUserID}){
             <View>
                 <Text style={styles.greet}>Fill in your Data</Text>
                 <Text style={styles.describe}>Email</Text>
-                <TextInput placeholder="Email" style={styles.input} onChange={changeEmail}/>
-                <Text style={styles.describe}>Username</Text>  
-                <TextInput placeholder="Username" style={styles.input} onChange={changeUsername}/>
+                <TextInput placeholder="Email" style={styles.input} onChangeText={text => setEmail(text)}/>
                 <Text style={styles.describe}>Password</Text>
-                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} onChange={changePassword}/>  
+                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} onChangeText={text => setPassword(text)}/>  
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.register} onPress={register}>
@@ -115,3 +96,27 @@ const styles = StyleSheet.create({
         opacity:0.5,
     }
 });
+
+/* 
+const register = async ()=>{
+        axios.get(`http://localhost:8080/api/public/register?email=${email}&username=${username}&password=${password}`)
+        .then((res)=>{
+            if(res.data.loggedIn){
+                setCredentials({
+                    uname:username,
+                    upassword:password
+                })
+                setUserID(res.data.userID);
+                navigation.navigate("Ziele");
+            }else{
+                navigation.navigate("Sign Up");
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
+*/
+
+

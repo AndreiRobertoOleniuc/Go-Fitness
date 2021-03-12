@@ -21,16 +21,7 @@ export default function PAL({navigation,userID,userData,setUserData}){
             navigation.navigate("PAL");
         }else{
             setUserData([userData[0],userData[1],userData[2],userData[3],userData[4],stunden]);
-            axios.post(`http://localhost:8080/api/public/fillData?id=${userID}&goal=${userData[0]}&gender=${userData[1]}&weight=${userData[2]}&height=${userData[3]}`,{
-                birthday:userData[4],
-                stunden:stunden
-            })
-            .then((res)=>{
-                navigation.navigate("HomePage");
-            })
-            .catch((err)=>{
-                console.log(err);
-            })
+            navigation.navigate("HomePage");
         }
     }
     return(
@@ -150,3 +141,23 @@ const styles = StyleSheet.create({
         opacity:0.5,
     }
 });
+
+
+/*
+if(stunden.includes("emtpy")||stunden.includes("")){
+            navigation.navigate("PAL");
+        }else{
+            setUserData([userData[0],userData[1],userData[2],userData[3],userData[4],stunden]);
+            axios.post(`http://localhost:8080/api/public/fillData?id=${userID}&goal=${userData[0]}&gender=${userData[1]}&weight=${userData[2]}&height=${userData[3]}`,{
+                birthday:userData[4],
+                stunden:stunden
+            })
+            .then((res)=>{
+                navigation.navigate("HomePage");
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+
+*/

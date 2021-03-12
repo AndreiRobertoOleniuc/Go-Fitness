@@ -1,31 +1,15 @@
 import React,{useState} from "react";
 import { StyleSheet, Text, View,TextInput,TouchableOpacity } from "react-native";
-import axios from "axios";
+import {useAuth} from "./AuthProvider";
 
-export default function Login({navigation,setUserID,setCredentials}){
-    const [username,setUsername] = useState();
+export default function Login({navigation}){
+    const [email,setEmail] = useState();
     const [password,setPassword] = useState();
-    const login = async ()=>{
-        axios.get(`http://localhost:8080/api/public/login?username=${username}&password=${password}`)
-        .then((res)=>{
-            if(res.data.loggedIn){
-                setCredentials({
-                    uname:username,
-                    upassword:password
-                })
-                setUserID(res.data.userID);
-                if(res.data.dataFilled){
-                    navigation.navigate("HomePage");
-                }else{
-                    navigation.navigate("Ziele");
-                }
-            }else{
-                navigation.navigate("Login");
-            }
-        })
-    }
-    const changeUsername = (e) => setUsername(e.target.value);
-    const changePassword = (e) => setPassword(e.target.value);
+    const { login } = useAuth();
+
+    const loginSubmit = ()=>{
+        login(email,password);
+    }  
     return(
         <View style={styles.container}>
             <View>
@@ -33,11 +17,11 @@ export default function Login({navigation,setUserID,setCredentials}){
             </View>
             <View>
                 <Text style={styles.greet}>Welcome</Text>
-                <TextInput placeholder="Username or Email" style={styles.input} onChange={changeUsername}/>
-                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} onChange={changePassword}/>  
+                <TextInput placeholder="Username or Email" style={styles.input} onChangeText={text=>setEmail(text)}/>
+                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>  
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.login} onPress={login}>
+                <TouchableOpacity style={styles.login} onPress={loginSubmit}>
                     <Text style={styles.whiteText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Sign Up')} style={styles.signUpContainer}>
@@ -103,3 +87,26 @@ const styles = StyleSheet.create({
         color:"grey",
     }
 });
+
+/*
+
+    const login = async ()=>{
+        axios.get(`http://localhost:8080/api/public/login?username=${username}&password=${password}`)
+        .then((res)=>{
+            if(res.data.loggedIn){
+                setCredentials({
+                    uname:username,
+                    upassword:password
+                })
+                setUserID(res.data.userID);
+                if(res.data.dataFilled){
+                    navigation.navigate("HomePage");
+                }else{
+                    navigation.navigate("Ziele");
+                }
+            }else{
+                navigation.navigate("Login");
+            }
+        })
+    }
+*/
