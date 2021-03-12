@@ -1,74 +1,89 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {View,Text,TouchableOpacity,StyleSheet,ScrollView} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
+import {db} from "../firebase";
+import {useAuth} from "../AuthProvider";
+import firebase from "firebase";
 
-export default function HomeScreen({navigation,userID,credentials}){
-    const [essen,setEssen] = useState([
-        {
-            name:"Kiwi",
-            cal:40
-        },
-        {
-            name:"Apfel",
-            cal:100
-        },
-        {
-            name:"Spaghetti",
-            cal:500
-        },
-        {
-            name:"Pizza",
-            cal:800
-        },
-        {
-            name:"Milch",
-            cal:150
-        },
-        {
-            name:"Müsli",
-            cal:100
-        },
-        {
-            name:"Bannana",
-            cal:90
-        },
-    ]);
+
+export default function HomeScreen({navigation}){
+    const {currentUser} = useAuth();
+    const [data,setUserData] = useState([]);
+    const [loading,setLoading] = useState(true);
+    const [abzug,setAbzug] = useState(0);
+
+    let dat = new Date();
+    const year = dat.getFullYear();
+    const month = dat.getMonth();
+    const day = dat.getDay();
+    const datum = year + "-" + month+"-" + day;
+
+    useEffect(()=>{
+        db.collection("userData").doc(currentUser.uid)
+            .onSnapshot((doc)=>{
+                let toAdd=0;
+                setUserData(doc.data());
+                setLoading(false);
+                doc.data().essen.map((item)=>{
+                    if(item.time===datum){
+                        toAdd += item.cal;
+                    }
+                })
+                setAbzug(toAdd);
+            })
+    },[]);
+    const deleteFood = (food)=>{
+        console.log(food)
+        db.collection("userData").doc(currentUser.uid).update({
+            essen: firebase.firestore.FieldValue.arrayRemove(food)
+        })
+    }
     return(
         <View style={styles.container}>
-            <View  style={styles.title}>
-                <Text style={styles.titleText}>GoFitME</Text>
-            </View>
-            <View style={styles.calories}>
-                <Text style={styles.caloriesTitle}>Calorien Verbleibend</Text>
-                <View style={{flex:0,flexDirection:"row", justifyContent:"space-around"}}>
-                    <View>
-                        <Text style={styles.textCal}>2555</Text>
-                        <Text style={{color:"rgba(224, 227, 222,0.5)",fontSize:15,}}>Ziel</Text>
+            {loading?(<Text>Loading</Text>):(
+                <View>
+                    <View  style={styles.title}>
+                        <Text style={styles.titleText}>GoFitME</Text>
                     </View>
-                    <Text style={styles.textCal}>-</Text>
-                    <View>
-                        <Text style={styles.textCal}>600</Text>
-                        <Text style={{color:"rgba(224, 227, 222,0.5)",fontSize:15,}}>Gegessen</Text>
+                    <View style={styles.calories}>
+                        <Text style={styles.caloriesTitle}>Calorien Verbleibend</Text>
+                        <View style={{flex:0,flexDirection:"row", justifyContent:"space-around"}}>
+                        <View>
+                            <Text style={styles.textCal}>{(data == null)?null:data.calories.toFixed(0)}</Text>
+                            <Text style={{color:"rgba(224, 227, 222,0.5)",fontSize:15,}}>Ziel</Text>
+                        </View>
+                        <Text style={styles.textCal}>-</Text>
+                        <View>
+                            <Text style={styles.textCal}>{abzug}</Text>
+                            <Text style={{color:"rgba(224, 227, 222,0.5)",fontSize:15,}}>Gegessen</Text>
+                        </View>
+                        <Text style={styles.textCal}>=</Text>
+                        <View>
+                            <Text style={{color:"#3aad23",fontSize:17}}>{(data.calories-abzug).toFixed(0)}</Text>
+                            <Text style={{color:"rgba(224, 227, 222,0.5)",fontSize:15,}}>Verbleiben</Text>
+                        </View>
                     </View>
-                    <Text style={styles.textCal}>=</Text>
-                    <View>
-                        <Text style={{color:"#3aad23",fontSize:17}}>1955</Text>
-                        <Text style={{color:"rgba(224, 227, 222,0.5)",fontSize:15,}}>Verbleiben</Text>
                     </View>
+                    <Text style={styles.info}>Dein Essen heute</Text>
+                    <ScrollView style={styles.essenContainer}>
+                        {data.essen.map((item,key)=>{
+                            if(item.time===datum){
+                                return (  
+                                    <View style={styles.essen} key={key}>
+                                        <Text style={styles.essenName}>Name: {item.name}</Text>
+                                        <Text style={styles.essenInfo}>Calorien: {item.cal}</Text>
+                                        <TouchableOpacity style={styles.delete} onPress={()=>{deleteFood(item)}}>
+                                            <MaterialIcons name="delete" size={23} color="red" />
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            }else{
+                                return (null);
+                            }
+                        })}
+                    </ScrollView>
                 </View>
-            </View>
-            <Text style={styles.info}>Dein Essen heute</Text>
-            <ScrollView style={styles.essenContainer}>
-                {essen.map((item,key)=>(  
-                    <View style={styles.essen} key={key}>
-                        <Text style={styles.essenInfo}>Name: {item.name}</Text>
-                        <Text style={styles.essenInfo}>Calorien: {item.cal}</Text>
-                        <TouchableOpacity style={styles.delete}>
-                            <MaterialIcons name="delete" size={23} color="red" />
-                        </TouchableOpacity>
-                    </View>
-                ))}
-            </ScrollView>
+            )}
         </View>
     )
 }
@@ -137,5 +152,10 @@ const styles = StyleSheet.create({
     essenInfo:{
         color:"white",
         fontSize:15,
-    }
+    },
+    essenName:{
+        maxWidth:110,
+        color:"white",
+        fontSize:15,
+    },
 });

@@ -7,19 +7,22 @@ export default function Login({navigation}){
     const [email,setEmail] = useState();
     const [password,setPassword] = useState();
     const { login,currentUser } = useAuth();
-
+    const [fail,setFaile] = useState(null);
     const loginSubmit = ()=>{
-        login(email,password);
-        db.collection('userData').doc(currentUser.uid).get()
+        try{
+            login(email,password);
+            db.collection('userData').doc(currentUser.uid).get()
             .then((docSnapshot) => {
                 if (docSnapshot.exists) {
-                    db.collection('userData').doc(currentUser.uid).onSnapshot((doc) => {
-                        navigation.navigate("HomePage");
-                    });
+                    navigation.navigate("HomePage");
                 }else{
                     navigation.navigate("Ziele");
                 }
-        });
+            });
+        }catch{
+            console.log("failed")
+            setFaile("Login Failed");
+        }
     }  
     return(
         <View style={styles.container}>
@@ -39,6 +42,7 @@ export default function Login({navigation}){
                     <Text>Don't have an account? </Text>
                     <Text style={styles.signUp}>Sign Up</Text>
                 </TouchableOpacity>
+                <Text style={{color:"red"}}>{(fail==null)?null:fail}</Text>
             </View>
         </View>
     )
@@ -91,7 +95,6 @@ const styles = StyleSheet.create({
         color:"white",
     },
     signUpContainer:{
-        flex:1,
         flexDirection:"row",
     },
     signUp:{

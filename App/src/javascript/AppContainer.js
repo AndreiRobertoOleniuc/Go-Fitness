@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from "./Screen/HomeScreen";
 import Settings from "./Screen/Settings";
@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-export default function AppContainer({userID,credentials}) {
+export default function AppContainer({}) {
     return (
     <Tab.Navigator
         inactiveColor="#404040"

@@ -7,11 +7,16 @@ export default function Registrieren({navigation}){
     const [email,setEmail] = useState();
     const [password,setPassword] = useState();
     const {signup,currentUser} = useAuth();
-
+    const [fail,setFaile] = useState(null);
     const register = ()=>{
-        signup(email,password);
-        if(currentUser!=null){
-            navigation.navigate('Login');
+        try{
+            signup(email,password);
+            if(currentUser!=null){
+                navigation.navigate('Login');
+            }
+        }catch{
+            console.log("failed")
+            setFaile("Registration Failed");
         }
     }
     return(
@@ -34,6 +39,7 @@ export default function Registrieren({navigation}){
                     <Text>Already have an Accound </Text>
                     <Text style={styles.login}>Login here</Text>
                 </TouchableOpacity>
+                <Text style={{color:"red"}}>{(fail==null)?null:fail}</Text>
             </View>
         </KeyboardAwareScrollView>
     )
@@ -87,7 +93,6 @@ const styles = StyleSheet.create({
         color:"white",
     },
     loginContainer:{
-        flex:1,
         flexDirection:"row",
     },
     login:{
@@ -98,27 +103,3 @@ const styles = StyleSheet.create({
         opacity:0.5,
     }
 });
-
-/* 
-const register = async ()=>{
-        axios.get(`http://localhost:8080/api/public/register?email=${email}&username=${username}&password=${password}`)
-        .then((res)=>{
-            if(res.data.loggedIn){
-                setCredentials({
-                    uname:username,
-                    upassword:password
-                })
-                setUserID(res.data.userID);
-                navigation.navigate("Ziele");
-            }else{
-                navigation.navigate("Sign Up");
-            }
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-    }
-
-*/
-
-

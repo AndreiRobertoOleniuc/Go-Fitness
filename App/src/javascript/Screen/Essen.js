@@ -2,8 +2,40 @@ import React,{ useState} from "react";
 import {View,Text,TouchableOpacity,StyleSheet,ScrollView,TextInput} from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
 import axios from "axios";
+import {db} from "../firebase";
+import {useAuth} from "../AuthProvider";
 
 export default function Essen() {
+    //Firebase
+    const {currentUser} = useAuth();
+    const addFood = (item) =>{
+        db.collection("userData").doc(currentUser.uid)
+        .get()
+        .then((doc)=>{
+            if(doc.exists){
+                addIt(item,doc.data());
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+    const addIt = (item,essenData)=>{
+        let dat = new Date();
+        const year = dat.getFullYear();
+        const month = dat.getMonth();
+        const day = dat.getDay();
+        const datum = year + "-" + month+"-" + day;
+        db.collection('userData').doc(currentUser.uid).set({
+            essen: [...essenData.essen,{
+                name:item.description,
+                cal:item.foodNutrients[3].value,
+                time:datum,
+            }]
+        }, { merge: true });
+        setFoods([]);
+    }
+    //Food API
     const [foods,setFoods] = useState([]);
     const [input,setInput] = useState("");
     const searchFood = async () => {  
@@ -14,12 +46,6 @@ export default function Essen() {
         }).catch((err)=>{
             console.log(err);
         })
-    }
-    const addFood = (item) =>{
-        //console.log(res.data.foods[1].description);
-        //console.log(res.data.foods[1].foodNutrients[3].value);
-        console.log(item.foodNutrients[3].value);
-        setFoods([]);
     }
     return (
         <View style={styles.container}>

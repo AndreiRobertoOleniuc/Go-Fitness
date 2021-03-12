@@ -11,25 +11,17 @@ import {db} from "../firebase";
 
 export default function PAL({navigation,userData,setUserData}){
     const [stunden,setStuden] = useState(["empty","empty","empty","empty","empty","empty"]);
-    const change1 = (e)=> setStuden([e.target.value,stunden[1],stunden[2],stunden[3],stunden[4],stunden[5]]);
-    const change2 = (e)=> setStuden([stunden[0],e.target.value,stunden[2],stunden[3],stunden[4],stunden[5]]);
-    const change3 = (e)=> setStuden([stunden[0],stunden[1],e.target.value,stunden[3],stunden[4],stunden[5]]);
-    const change4 = (e)=> setStuden([stunden[0],stunden[1],stunden[2],e.target.value,stunden[4],stunden[5]]);
-    const change5 = (e)=> setStuden([stunden[0],stunden[1],stunden[2],stunden[3],e.target.value,stunden[5]]);
-    const change6 = (e)=> setStuden([stunden[0],stunden[1],stunden[2],stunden[3],stunden[4],e.target.value]);
-
     const { currentUser } = useAuth();
-    const [cal,setCal] = useState(0.0);
-
     const weiter = ()=>{
         if(stunden.includes("emtpy")||stunden.includes("")){
             navigation.navigate("PAL");
         }else{
             setUserData([userData[0],userData[1],userData[2],userData[3],userData[4],stunden]);
             navigation.navigate("HomePage");
-
             db.collection("userData").doc(currentUser.uid).set({
                 userData: userData,
+                calories:getCal(),
+                essen:[],
             })
             .then(() => {
                 console.log("Document successfully written!");
@@ -40,12 +32,28 @@ export default function PAL({navigation,userData,setUserData}){
         }
     }
     const getCal = ()=>{
-        
+        let base;
+        let pal;
         if(userData[1]){
-            setCal(66.47 + (13.7 * userData[2]) + (5 * userData[3]) - (6.8 * age));
+            base = 66.47 + (13.7 * userData[2]) + (5 * userData[3]) - (6.8 * Age(userData[4]));
         }else{
-            setCal();
+            base = 655.1 + (9.6 * userData[2]) + (1.8 * userData[3]) - (4.7 * Age(userData[4]));
         }
+        pal = ((stunden[0] * 0.95) + (stunden[1]* 1.2) + (stunden[2] * 1.45) + (stunden[3] * 1.65) + (stunden[4] * 1.85) + (stunden[5] * 2.2)) / 24;
+        if(userData[0]="zunehmen"){
+            return base * pal + 400;
+        }else{
+            return base * pal - 550;
+        }
+    }
+    function Age(inputAge) {
+        while(inputAge.includes(".")){
+            inputAge = inputAge.replace(".","-");
+        }
+        const birthday = new Date(inputAge);
+        const today = new Date();
+        const one_year = 1000 * 60 * 60 * 24 * 365;
+        return Math.floor((today.getTime() - birthday.getTime()) / one_year);
     }
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container} bounces={false}>
@@ -60,32 +68,32 @@ export default function PAL({navigation,userData,setUserData}){
                 <Text style={styles.describe}>Schlafen</Text>
                 <View style={styles.input}>
                     <MaterialCommunityIcons name="sleep" size={22} color="black" />
-                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChange={change1}/>
+                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChangeText={text=>setStuden([text,stunden[1],stunden[2],stunden[3],stunden[4],stunden[5]])}/>
                 </View>
                 <Text style={styles.describe}>Nur sitzend oder liegend</Text>  
                 <View style={styles.input}>
                     <MaterialCommunityIcons name="chair-rolling" size={22} color="black" />
-                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChange={change2}/>
+                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChangeText={text=>setStuden([stunden[0],text,stunden[2],stunden[3],stunden[4],stunden[5]])}/>
                 </View>
                 <Text style={styles.describe}>Sitzend, kaum körperliche Aktivität</Text>
                 <View style={styles.input}>
                     <MaterialIcons name="computer" size={22} color="black" />
-                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChange={change3}/>
+                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChangeText={text=>setStuden([stunden[0],stunden[1],text,stunden[3],stunden[4],stunden[5]])}/>
                 </View>
                 <Text style={styles.describe}>Überwiegend sitzend, gehend und stehend</Text>
                 <View style={styles.input}>
                     <FontAwesome name="book" size={22} color="black" />
-                    <TextInput placeholder="Stunden" keyboardType='numeric'style={styles.textfields} onChange={change4}/>
+                    <TextInput placeholder="Stunden" keyboardType='numeric'style={styles.textfields} onChangeText={text=>setStuden([stunden[0],stunden[1],stunden[2],text,stunden[4],stunden[5]])}/>
                 </View> 
                 <Text style={styles.describe}>Hauptsächlich stehend und gehend</Text>
                 <View style={styles.input}>
                     <FontAwesome5 name="walking" size={20} color="black" />
-                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChange={change5}/>
+                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChangeText={text=>setStuden([stunden[0],stunden[1],stunden[2],stunden[3],text,stunden[5]])}/>
                 </View>
                 <Text style={styles.describe}>Körperlich anstrengende Arbeit</Text>
                 <View style={styles.input}>
                     <Ionicons name="football" size={21} color="black" />
-                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChange={change6}/>
+                    <TextInput placeholder="Stunden" keyboardType='numeric' style={styles.textfields} onChangeText={text=>setStuden([stunden[0],stunden[1],stunden[2],stunden[3],stunden[4],text])}/>
                 </View>
             </View>
             <View style={styles.btnContainer}>

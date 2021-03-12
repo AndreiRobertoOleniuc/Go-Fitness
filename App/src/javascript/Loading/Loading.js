@@ -1,21 +1,18 @@
-import React from "react";
-import {View,Text,TouchableOpacity,StyleSheet,ScrollView} from "react-native";
-import {useAuth} from "../AuthProvider";
+import React,{ useState} from "react";
+import {View,Text,TouchableOpacity,StyleSheet,ScrollView,TextInput} from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
 
-export default function SettingsScreen({navigation}) {
-    const getOut =()=>{
-        logout();
-        navigation.navigate("Login");
-    }
-    const {logout} = useAuth();
+export default function Loading() {
+
     return (
         <View style={styles.container}>
             <View  style={styles.title}>
-                <Text style={styles.titleText}>GoFitME</Text>
+                <Text style={styles.titleText}>Loading</Text>
             </View>
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -34,17 +31,10 @@ const styles = StyleSheet.create({
         marginBottom:20,
     },
     titleText:{
-        fontSize:30,
         marginTop:30,
+        fontSize:30,
         fontWeight:"700",
         alignSelf:"baseline",
         color:"#ffffff",
     },
-    logOut:{
-        backgroundColor:"#007aff",
-        borderRadius:5,
-        justifyContent:"center",
-        alignItems:"center",
-        padding:5,
-    }
 });
