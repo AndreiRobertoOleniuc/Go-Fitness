@@ -34,15 +34,15 @@ export default function PAL({navigation,userData,setUserData}){
     const getCal = ()=>{
         let base;
         let pal;
-        if(userData[1]){
+        if(userData[1]==true){
             base = 66.47 + (13.7 * userData[2]) + (5 * userData[3]) - (6.8 * Age(userData[4]));
         }else{
             base = 655.1 + (9.6 * userData[2]) + (1.8 * userData[3]) - (4.7 * Age(userData[4]));
         }
         pal = ((stunden[0] * 0.95) + (stunden[1]* 1.2) + (stunden[2] * 1.45) + (stunden[3] * 1.65) + (stunden[4] * 1.85) + (stunden[5] * 2.2)) / 24;
-        if(userData[0]="zunehmen"){
+        if(userData[0]==="zunehmen"){
             return base * pal + 400;
-        }else{
+        }else if(userData[0]==="abnehmen"){
             return base * pal - 550;
         }
     }
@@ -55,6 +55,9 @@ export default function PAL({navigation,userData,setUserData}){
         const one_year = 1000 * 60 * 60 * 24 * 365;
         return Math.floor((today.getTime() - birthday.getTime()) / one_year);
     }
+    React.useEffect(()=>{
+        console.log(userData);
+    },[])
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container} bounces={false}>
             <View style={{marginBottom:10}}>
