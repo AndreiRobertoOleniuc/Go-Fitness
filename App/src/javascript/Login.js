@@ -27,7 +27,7 @@ export default function Login({navigation}){
     return(
         <View style={styles.container}>
             <View>
-                <Text style={styles.title}>Go Fitness</Text>
+                <Text style={styles.title}>GoFitMe</Text>
             </View>
             <View>
                 <Text style={styles.greet}>Welcome</Text>

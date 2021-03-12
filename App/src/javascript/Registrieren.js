@@ -22,7 +22,7 @@ export default function Registrieren({navigation}){
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container} bounces={false}>
             <View>
-                <Text style={styles.title}>Go Fitness</Text>
+                <Text style={styles.title}>GoFitMe</Text>
             </View>
             <View>
                 <Text style={styles.greet}>Fill in your Data</Text>
