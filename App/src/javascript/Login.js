@@ -40,7 +40,7 @@ export default function Login({navigation}){
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Sign Up')} style={styles.signUpContainer}>
                     <Text>Keinen Account? </Text>
-                    <Text style={styles.signUp}>Registerien</Text>
+                    <Text style={styles.signUp}>Registrieren</Text>
                 </TouchableOpacity>
                 <Text style={{color:"red"}}>{(fail==null)?null:fail}</Text>
             </View>
