@@ -1,13 +1,13 @@
 import React,{useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from "./javascript/Login";
-import SignUp from "./javascript/Registrieren";
-import Form from "./javascript/Form/BasicData";
-import Container from "./javascript/AppContainer";
-import Ziel from "./javascript/Form/Ziel";
-import PAL from './javascript/Form/PAL';
-import {AuthProvider} from "./javascript/AuthProvider";
+import Login from "./Screens/Public/Login";
+import SignUp from "./Screens/Public/Registrieren";
+import Form from "./Screens/Public/Form/Form";
+import Container from "./Screens/Private/AppContainer";
+import Ziel from "./Screens/Public/Form/Ziel";
+import PAL from './Screens/Public/Form/PAL';
+import {AuthProvider} from "./Screens/Public/AuthProvider";
 
 const Stack = createStackNavigator();
 

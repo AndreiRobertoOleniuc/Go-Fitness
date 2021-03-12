@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function Form({navigation,setUserData,userData}){
+export default function BasicData({navigation,setUserData,userData}){
     const [styleMale,setStyleMale] = useState([styles.maleContainer,"grey"]);
     const [styleFemale,setStyleFemale] = useState([styles.femaleContainer,"grey"]);
     const changeToMale= ()=>{
