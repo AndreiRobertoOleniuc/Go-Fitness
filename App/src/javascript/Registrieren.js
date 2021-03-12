@@ -25,19 +25,19 @@ export default function Registrieren({navigation}){
                 <Text style={styles.title}>GoFitMe</Text>
             </View>
             <View>
-                <Text style={styles.greet}>Fill in your Data</Text>
+                <Text style={styles.greet}>Registrieren Sie sich</Text>
                 <Text style={styles.describe}>Email</Text>
                 <TextInput placeholder="Email" style={styles.input} onChangeText={text => setEmail(text)}/>
                 <Text style={styles.describe}>Password</Text>
-                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} onChangeText={text => setPassword(text)}/>  
+                <TextInput placeholder="Passwort" style={styles.input} secureTextEntry={true} onChangeText={text => setPassword(text)}/>  
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.register} onPress={register}>
-                    <Text style={styles.whiteText}>Register</Text>
+                    <Text style={styles.whiteText}>Registieren</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.loginContainer}>
-                    <Text>Already have an Accound </Text>
-                    <Text style={styles.login}>Login here</Text>
+                    <Text>Sie haben schon ein Account </Text>
+                    <Text style={styles.login}>zum Login</Text>
                 </TouchableOpacity>
                 <Text style={{color:"red"}}>{(fail==null)?null:fail}</Text>
             </View>

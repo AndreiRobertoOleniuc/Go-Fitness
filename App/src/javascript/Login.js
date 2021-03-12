@@ -30,17 +30,17 @@ export default function Login({navigation}){
                 <Text style={styles.title}>GoFitMe</Text>
             </View>
             <View>
-                <Text style={styles.greet}>Welcome</Text>
-                <TextInput placeholder="Username or Email" style={styles.input} onChangeText={text=>setEmail(text)}/>
-                <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>  
+                <Text style={styles.greet}>Willkomen</Text>
+                <TextInput placeholder="Email" style={styles.input} onChangeText={text=>setEmail(text)}/>
+                <TextInput placeholder="Passwort" style={styles.input} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>  
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.login} onPress={loginSubmit}>
                     <Text style={styles.whiteText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Sign Up')} style={styles.signUpContainer}>
-                    <Text>Don't have an account? </Text>
-                    <Text style={styles.signUp}>Sign Up</Text>
+                    <Text>Keinen Account? </Text>
+                    <Text style={styles.signUp}>Registerien</Text>
                 </TouchableOpacity>
                 <Text style={{color:"red"}}>{(fail==null)?null:fail}</Text>
             </View>
