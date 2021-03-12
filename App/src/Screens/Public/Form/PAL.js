@@ -5,10 +5,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import axios from "axios";
+import { Ionicons } from '@expo/vector-icons';  
+import {useAuth} from "../AuthProvider";
+import {db} from "../firebase";
 
-export default function PAL({navigation,userID,userData,setUserData}){
+export default function PAL({navigation,userData,setUserData}){
     const [stunden,setStuden] = useState(["empty","empty","empty","empty","empty","empty"]);
     const change1 = (e)=> setStuden([e.target.value,stunden[1],stunden[2],stunden[3],stunden[4],stunden[5]]);
     const change2 = (e)=> setStuden([stunden[0],e.target.value,stunden[2],stunden[3],stunden[4],stunden[5]]);
@@ -16,12 +17,34 @@ export default function PAL({navigation,userID,userData,setUserData}){
     const change4 = (e)=> setStuden([stunden[0],stunden[1],stunden[2],e.target.value,stunden[4],stunden[5]]);
     const change5 = (e)=> setStuden([stunden[0],stunden[1],stunden[2],stunden[3],e.target.value,stunden[5]]);
     const change6 = (e)=> setStuden([stunden[0],stunden[1],stunden[2],stunden[3],stunden[4],e.target.value]);
+
+    const { currentUser } = useAuth();
+    const [cal,setCal] = useState(0.0);
+
     const weiter = ()=>{
         if(stunden.includes("emtpy")||stunden.includes("")){
             navigation.navigate("PAL");
         }else{
             setUserData([userData[0],userData[1],userData[2],userData[3],userData[4],stunden]);
             navigation.navigate("HomePage");
+
+            db.collection("userData").doc(currentUser.uid).set({
+                userData: userData,
+            })
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+        }
+    }
+    const getCal = ()=>{
+        
+        if(userData[1]){
+            setCal(66.47 + (13.7 * userData[2]) + (5 * userData[3]) - (6.8 * age));
+        }else{
+            setCal();
         }
     }
     return(

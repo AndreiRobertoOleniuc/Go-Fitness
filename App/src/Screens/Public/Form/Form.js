@@ -21,10 +21,6 @@ export default function Form({navigation,setUserData,userData}){
     const [weight,setWeight] = useState();
     const [height,setHeight] = useState();
 
-    const changeGeburtsdatum = (e)=> setGeburtsDatum(e.target.value.replaceAll(".","-"));
-    const changeWeight = (e) => setWeight(e.target.value);
-    const changeHeight = (e) => setHeight(e.target.value);
-
     const weiter = ()=>{
         if(geburtDatum==null||weight==null||height==null||userData[1]==="gender"){
             navigation.navigate("Form");
@@ -46,7 +42,7 @@ export default function Form({navigation,setUserData,userData}){
             <View style={styles.holder}>
                 <View style={styles.containerAge}>
                     <MaterialIcons name="date-range" size={24} color="black" />
-                    <TextInput placeholder="Geburtsdatum (Format 2005.06.10)" style={styles.input} keyboardType='numeric' onChange={changeGeburtsdatum}/>
+                    <TextInput placeholder="Geburtsdatum (Format 2005.06.10)" style={styles.input} keyboardType='numeric' onChangeText={text=>setGeburtsDatum(text)}/>
                 </View>
                 <View style={styles.containerGender}>
                     <View style={styles.genderSelector}>
@@ -56,11 +52,11 @@ export default function Form({navigation,setUserData,userData}){
                 </View>
                 <View style={styles.containerWeight}>
                     <FontAwesome5 name="weight" size={24} color="black" />
-                    <TextInput placeholder="Gewicht (Kilogramm)" style={styles.input} keyboardType='numeric' onChange={changeWeight} />
+                    <TextInput placeholder="Gewicht (Kilogramm)" style={styles.input} keyboardType='numeric' onChangeText={text=>setWeight(text)} />
                 </View>
                 <View style={styles.containerHeight}>
                     <MaterialCommunityIcons name="human-male-height-variant" size={24} color="black" />
-                    <TextInput placeholder="Grösse (CM)" style={styles.input} keyboardType='numeric' onChange={changeHeight}/>
+                    <TextInput placeholder="Grösse (CM)" style={styles.input} keyboardType='numeric' onChangeText={text=>setHeight(text)}/>
                 </View>
                 <TouchableOpacity style={styles.confirm} onPress={weiter}>
                     <Text style={{color:"white"}}>Fortfahren</Text>

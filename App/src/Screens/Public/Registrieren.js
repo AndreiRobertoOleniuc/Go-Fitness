@@ -6,11 +6,13 @@ import {useAuth} from "./AuthProvider";
 export default function Registrieren({navigation}){
     const [email,setEmail] = useState();
     const [password,setPassword] = useState();
-    const {signup} = useAuth();
+    const {signup,currentUser} = useAuth();
 
-    const register = (e)=>{
-        e.preventDefault();
+    const register = ()=>{
         signup(email,password);
+        if(currentUser!=null){
+            navigation.navigate('Login');
+        }
     }
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container} bounces={false}>

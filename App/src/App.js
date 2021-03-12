@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from "./Screens/Public/Login";
@@ -8,6 +8,7 @@ import Container from "./Screens/Private/AppContainer";
 import Ziel from "./Screens/Public/Form/Ziel";
 import PAL from './Screens/Public/Form/PAL';
 import {AuthProvider} from "./Screens/Public/AuthProvider";
+
 const Stack = createStackNavigator();
 
 //Icons https://icons.expo.fyi/

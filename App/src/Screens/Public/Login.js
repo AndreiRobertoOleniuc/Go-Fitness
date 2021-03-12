@@ -1,14 +1,25 @@
 import React,{useState} from "react";
 import { StyleSheet, Text, View,TextInput,TouchableOpacity } from "react-native";
 import {useAuth} from "./AuthProvider";
+import {db} from "./firebase";
 
 export default function Login({navigation}){
     const [email,setEmail] = useState();
     const [password,setPassword] = useState();
-    const { login } = useAuth();
+    const { login,currentUser } = useAuth();
 
     const loginSubmit = ()=>{
         login(email,password);
+        db.collection('userData').doc(currentUser.uid).get()
+            .then((docSnapshot) => {
+                if (docSnapshot.exists) {
+                    db.collection('userData').doc(currentUser.uid).onSnapshot((doc) => {
+                        navigation.navigate("HomePage");
+                    });
+                }else{
+                    navigation.navigate("Ziele");
+                }
+        });
     }  
     return(
         <View style={styles.container}>
