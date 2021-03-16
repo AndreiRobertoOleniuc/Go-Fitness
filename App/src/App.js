@@ -36,7 +36,7 @@ export default function App() {
           <Stack.Screen name="PAL" >
             {props => <PAL {...props} setUserData={setUserData}  userData={userData}/>}
           </Stack.Screen>
-          <Stack.Screen name="HomePage" >
+          <Stack.Screen name="HomePage" options={{gestureEnabled: false}}  >
             {props => <Container {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
